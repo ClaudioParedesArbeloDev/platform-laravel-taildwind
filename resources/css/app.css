@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+
+@theme {
+    --font-one: "Space Grotesk", sans-serif; 
+    --font-two: "Archivo Black", sans-serif;
+    --font-three: "Roboto", sans-serif;
+    --font-four: "Montserrat", sans-serif;
+    --font-five: "Permanent Marker", cursive;
+
+  /* Tema claro */
+  --color-background-100: #ffffff;
+  --color-background-200: #f5f5f5;
+  --color-background-300: #e5e5e5;
+  --color-background-400: #d4d4d4;
+  --color-background-500: #b3b3b3;
+  --color-background-600: #919191;
+  --color-background-700: #6e6e6e;
+  --color-background-800: #4a4a4a;
+  --color-background-900: #262626;
+
+  --color-text-100: #e0dedf;
+  --color-text-200: #c0bcbf;
+  --color-text-300: #a19b9e;
+  --color-text-400: #81797e;
+  --color-text-500: #565254;
+  --color-text-600: #454143;
+  --color-text-700: #343132;
+  --color-text-800: #232021;
+  --color-text-900: #121011;
+
+  --color-accent-100: #d2e9f0;
+  --color-accent-200: #a5d3e0;
+  --color-accent-300: #78bcd1;
+  --color-accent-400: #4ba6c1;
+  --color-accent-500: #1985a1;
+  --color-accent-600: #166a81;
+  --color-accent-700: #135061;
+  --color-accent-800: #0f3541;
+  --color-accent-900: #0b1b21;
+
+  --color-accent1-100: #f9e8d2;
+  --color-accent1-200: #f3d1a5;
+  --color-accent1-300: #edba78;
+  --color-accent1-400: #e7a34b;
+  --color-accent1-500: #e09f3e;
+  --color-accent1-600: #b37f32;
+  --color-accent1-700: #865f25;
+  --color-accent1-800: #594019;
+  --color-accent1-900: #2c200c;
+
+  --color-accent2-100: #C8CCB3;
+  --color-accent2-300: #AEB38C;
+  --color-accent2-500: #8B9556;
+  --color-accent2-700: #69713E;
+  --color-accent2-900: #47512A;
+  }
+
+.dark {
+    /* Tema oscuro */
+    --color-background-100: #4D4D4D;
+    --color-background-300: #3A3A3A;
+    --color-background-500: #231F20;
+    --color-background-700: #1A1718;
+    --color-background-900: #0F0E0E;
+
+    /* Escalado para text */
+    --color-text-100: #f1f1f1;
+    --color-text-300: #CCCCCC;
+    --color-text-500: #E6E6E6;
+    --color-text-700: #F0F0F0;
+    --color-text-900: #FFFFFF;
+
+    /* Escalado para accent */
+    --color-accent-100: #A3B8CC;
+    --color-accent-300: #7A96B3;
+    --color-accent-500: #577399;
+    --color-accent-700: #3E5A7A;
+    --color-accent-900: #2A4059;
+
+    /* Escalado para accent1 */
+    --color-accent1-100: #E6A3B3;
+    --color-accent1-300: #D37A8C;
+    --color-accent1-500: #BA274A;
+    --color-accent1-700: #8C1F38;
+    --color-accent1-900: #591526;
+
+    /* Escalado para accent2 */
+    --color-accent2-100: #C8CCB3;
+    --color-accent2-300: #AEB38C;
+    --color-accent2-500: #8B9556;
+    --color-accent2-700: #69713E;
+    --color-accent2-900: #47512A;
+  
+}
+
+
