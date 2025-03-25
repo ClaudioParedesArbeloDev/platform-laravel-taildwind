@@ -166,14 +166,14 @@ Route::middleware(LocaleCookie::class)->group(function () {
         
         
     //Routes Password Reset
-    Route::get('/forgot-password', function () {return view('auth.passwords.email');})
+    Route::get('/forgot-password', function () {return view('auth.email');})
         ->middleware('guest')->name('password.request');
 
     Route::post('/forgot-password', [ResetPasswordController::class, 'send'])
         ->middleware('guest')->name('password.email');
     
     Route::get('/reset-password/{token}', function (string $token) {
-            return view('auth.passwords.reset', ['token' => $token]);
+            return view('auth.reset', ['token' => $token]);
         })->middleware('guest')->name('password.reset');
 
     Route::post('/reset-password', [ResetPasswordController::class, 'reset'])

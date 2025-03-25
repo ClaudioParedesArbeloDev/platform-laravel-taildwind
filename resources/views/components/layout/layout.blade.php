@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/718dcffbc3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Tailwind CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/theme.js'])
@@ -43,7 +44,7 @@
             <a href="{{route('about')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
                 <li>{{ __('about') }}</li>
             </a>
-            <a href="" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+            <a href="{{route('contact.index')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
                 <li>{{ __('contact') }}</li>
             </a>
         </nav>
@@ -129,7 +130,7 @@
                 <a href="{{route('about')}}" class= "text-background-100 pt-4 pb-4">
                     <li>{{ __('about') }}</li>
                 </a>
-                <a href="" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('contact.index')}}" class= "text-background-100 pt-4 pb-4">
                     <li>{{ __('contact') }}</li>
                 </a>
             </nav>
