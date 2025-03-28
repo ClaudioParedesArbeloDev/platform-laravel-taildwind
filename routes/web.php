@@ -8,17 +8,14 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CoursesController;
-use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyPathController;
 use App\Http\Controllers\ClassesController;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\LocaleCookie;
 use App\Http\Middleware\IsAdmin;
@@ -161,7 +158,7 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::post('/contact', [ContactController::class, 'store'])
         ->name('contact.store');
 
-    Route::get('/success', function () {return view('pages.users.success');
+    Route::get('/success', function () {return view('pages.success');
         })->name('success');
         
         
@@ -187,7 +184,7 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::view('dashboard', 'pages.dashboard.home')->middleware('auth')
         ->name('dashboard');
 
- Route::get('/dashboard/perfil', [ProfileController::class, 'edit'])
+    Route::get('/dashboard/perfil', [ProfileController::class, 'edit'])
         ->name('profile.edit')->middleware('auth');
     
     Route::put('/dashboard/update', [ProfileController::class, 'update'])
@@ -214,20 +211,8 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::post('/courses/class', [ClassesController::class, 'homework'])
         ->name('cursos.homework')->middleware('auth');
 
-    Route::get('/dashboard/chat', [ChatController::class, 'index'])
-        ->name('chat')->middleware('auth');
-    
-    Route::post('/dashboard/chat', [ChatController::class, 'broadcast'])
-        ->name('chat.broadcast')->middleware('auth');
-    
-    Route::post('/dashboard/chat/receive', [ChatController::class, 'receive'])
-        ->name('chat.receive')->middleware('auth');
-      
-
     Route::post('courses/enroll', [CoursesController::class, 'enroll'])
         ->name('courses.enroll');
-    
-
 });
 
 

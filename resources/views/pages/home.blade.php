@@ -9,7 +9,7 @@
 
     @foreach ($courses as $course)
         <div class="courses" style="display: none;">
-            <div class="flex flex-col w-60 lg:w-80 mb-4 bg-accent2-500 border border-accent2-500 shadow-2xs rounded-xl  ">
+            <div class="flex flex-col w-60 lg:w-80 mb-4 bg-accent2-500 border border-accent2-500 shadow-2xs rounded-xl">
                 @if ($course->image != null)
                     <img src="{{ asset('storage/courses/'.$course->image) }}" alt="courseImage" class="w-full h-auto rounded-t-xl">    
                 @endif

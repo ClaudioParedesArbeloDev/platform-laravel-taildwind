@@ -18,7 +18,7 @@ class UsersController extends Controller
                 ->paginate();
 
 
-        return view ('users.users', compact('users'));
+        return view ('pages.dashboard.admin.users', compact('users'));
     }
 
     public function checkUsername(Request $request)
@@ -111,7 +111,7 @@ class UsersController extends Controller
     {
         $user = User::with('roles')->find($id);
 
-        return view('users.user', compact('user'));
+        return view('pages.dashboard.admin.user', compact('user'));
     }
 
     public function edit($id)
