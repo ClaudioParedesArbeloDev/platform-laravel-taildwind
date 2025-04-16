@@ -4,61 +4,82 @@
 
 @section('content')
 
-<div class="flex flex-col text-text-900 justify-center h-full items-center">
+<div class="flex flex-col font-three text-text-900 justify-center h-full items-center ">
 
     <a class="absolute top-8 right-8"  href="/users/"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
-    <h2 class="font-bold">{{__('User')}}: {{$user->lastname}}, {{$user->name}}</h2>
-    <div class="">
+    <h2 class="font-bold lg:text-2xl py-4">{{__('User')}}: {{$user->lastname}}, {{$user->name}}</h2>
+    <div>
         @if ($user->avatar && $user->avatar->avatar)
-            <img src="{{ asset('storage/' . $user->avatar->avatar) }}" alt="avatar" class="avatarUser">
+        <img src="{{asset('storage/avatars/'.Auth::user()->avatar->avatar)}}" alt="avatar" class="w-30 h-30 rounded-full object-cover">
         @else
-            <img src="{{asset('images/avatars/avatar.png')}}" alt="avatar" class="avatarUser">
+            <img src="{{asset('images/avatar.png')}}" alt="avatar" class="w-30 h-30 mx-auto rounded-full lg:w-50 lg:h-50">
         @endif
-        <dt>{{__('Name')}}</dt> 
-        <p class="answer">{{$user->name}}</p>
-        
-        <dt>{{__('Lastname')}}</dt> 
-        <p class="answer">{{$user->lastname}}</p>
-        
-        <dt>{{__('Address')}}</dt> 
-        <p class="answer">{{$user->address}}</p>
-        
-        <dt>{{__('Phone')}}</dt> 
-        <p class="answer">{{$user->phone}}</p>
-        
-        <dt>{{__('Email')}}</dt> 
-        <p class="answer">{{$user->email}}</p>
-        
-        <dt>DNI:</dt> 
-        <p class="answer">{{$user->dni}}</p>
-        
-        <dt>{{__('Date of Birth')}}:</dt> 
-        <p class="answer">{{$user->date_birth}}</p>
-        
-        <dt>{{__('Username')}}:</dt> 
-        <p class="answer">{{$user->username}}</p>
-        
-        <dt>{{__('Rol')}}:</dt>
-        @foreach($user->roles as $role)
-            <p class="answer">{{$role->name}}</p>
-        @endforeach
-        <dt>{{__('Courses')}}:</dt>
-        @foreach($user->courses as $course)
-                <p class="answer">{{$course->name}}</p> 
-                <p class="status">{{$course->pivot->status}}</p>
-        @endforeach
-        
 
-        <a href="/users/{{$user->id}}/edit" class = 'btnEdit'>{{__('Edit User')}}</a>
+        <div class="flex text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Name')}}:</dt> 
+            <p>{{$user->name}}</p>
+        </div>
+        
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Lastname')}}:</dt> 
+            <p>{{$user->lastname}}</p>
+        </div>
+        
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Address')}}</dt> 
+            <p>{{$user->address}}</p>
+        </div>
 
-        <form action="/users/{{$user->id}}" method="POST" id="deleteUserForm" >
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Phone')}}</dt> 
+            <p>{{$user->phone}}</p>
+        </div>
+
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Email')}}</dt> 
+            <p>{{$user->email}}</p>
+        </div>
+
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">DNI:</dt> 
+            <p>{{$user->dni}}</p>
+        </div>
+
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Date of Birth')}}:</dt> 
+            <p>{{$user->date_birth}}</p>
+        </div>
+
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Username')}}:</dt> 
+            <p>{{$user->username}}</p>
+        </div>
+
+        <div class="flex  text-xs py-2 lg:text-xl">
+            <dt class="pr-4">{{__('Rol')}}:</dt>
+            @foreach($user->roles as $role)
+                <p class="px-4">{{$role->name}}</p>
+            @endforeach
+        </div>
+
+        <div class="flex  text-xs py-2 mb-4 lg:text-xl">
+            <dt class="pr-4">{{__('Courses')}}:</dt>
+            @foreach($user->courses as $course)
+                <p class="px-4">{{$course->name}}</p>
+                <p class="px-4">{{$course->pivot->status}}</p>
+            @endforeach
+        </div>
+
+        <a href="/users/{{$user->id}}/edit" class="text-xs bg-accent2-500 p-2 rounded-md lg:text-xl">{{__('Edit User')}}</a>
+
+        <form action="/users/{{$user->id}}" method="POST" id="deleteUserForm"  >
 
             @csrf
 
             @method('DELETE')
 
-            <button type="submit" class="deleteUser">{{__('Delete User')}}</button>
+            <button type="submit" class="deleteUser text-xs bg-red-500 p-2 rounded-md mt-8 lg:text-xl">{{__('Delete User')}}</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
