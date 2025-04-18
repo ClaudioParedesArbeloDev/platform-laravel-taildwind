@@ -3,7 +3,7 @@
 @section('title', 'Code & Lens - Contacto')
 
 @section('content')
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center text-text-900">
         <h2 class="font-two text-md p-4 lg:text-2xl">{{__('Do you want to contact us?')}}</h2>
         <div>
             <form action="{{route('contact.store')}}" 

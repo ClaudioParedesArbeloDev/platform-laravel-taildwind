@@ -6,7 +6,7 @@
 
 
     <!-- Fuentes y Estilos -->
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/718dcffbc3.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -135,7 +135,7 @@
                 </a>
             </nav>
             <div class="flex items-center pt-2 pb-2">
-                <img src="images/logo.png" alt="" class= "w-6 h-6 m-4">
+                <img src="/images/logo.png" alt="" class= "w-6 h-6 m-4">
                 <div class="flex flex-col">
                     <p class="font-two text-text-300 text-xl">Code & Lens</p>
                     <p class="font-one text-text-300 text-sm tracking-[10px]">PLATFORM</p>

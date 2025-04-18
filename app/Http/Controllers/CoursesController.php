@@ -123,7 +123,7 @@ class CoursesController extends Controller
     public function cursoDetail($id)
     {
         $course = Course::findOrFail($id);
-        return view('courses.courseDetail', compact('course', 'id'));
+        return view('pages.courses.courseDetail', compact('course', 'id'));
     }
 
     public function enroll(Request $request)
