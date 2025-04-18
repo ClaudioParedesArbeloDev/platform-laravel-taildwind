@@ -4,10 +4,8 @@
 
 @section('content')
 
-    <link rel="stylesheet" href="{{ asset('sass/dashboard/myPath/myPath.css') }}">
-
-    <div class="container">
-        <h2>{{ __('My Learning Path') }}</h2>
+    <div class="flex flex-col items-center font-three">
+        <h2 class="font-bold text-xl py-4 lg:text-2xl lg:p-8">{{ __('My Learning Path') }}</h2>
 
         @php
             $inProgressCourses = Auth::user()->courses->where('pivot.status', 'in progress');
@@ -15,33 +13,33 @@
         @endphp
 
        
-        <h3>{{ __('In Progress') }}</h3>
+        <h3 class="font-bold text-lg py-4">{{ __('In Progress') }}</h3>
         @if ($inProgressCourses->isNotEmpty())
-            <div class="course-list">
+            <div class="flex flex-wrap">
                 @foreach ($inProgressCourses as $course)
-                    <div class="course-item">
-                        <p class="course-name">{{ $course->name }}</p>
-                        <a href="{{route('cursos.class', $course->id)}}" class="btn">{{ __('View Course') }}</a>
+                    <div class="border p-4 rounded-xl border-accent-500">
+                        <p class="py-2 font-bold lg:text-xl">{{ $course->name }}</p>
+                        <a href="{{route('cursos.class', $course->id)}}" class="bg-accent-300 p-2 rounded-xl">{{ __('View Course') }}</a>
                     </div>
                 @endforeach
-                </div>
+            </div>
         @else
-            <p>{{ __('No courses in progress.') }}</p>
+            <p class="py-4">{{ __('No courses in progress.') }}</p>
         @endif
 
         
-        <h3>{{ __('Completed') }}</h3>
+        <h3 class="font-bold text-lg py-4">{{ __('Completed') }}</h3>
         @if ($completedCourses->isNotEmpty())
-            <div class="course-list completed">
+            <div class="flex flex-wrap">
                 @foreach ($completedCourses as $course)
-                    <div class="course-item">
-                        <p class="course-name">{{ $course->name }}</p>
-                        <a href="{{route('cursos.class', $course->id)}}" class="btn">{{ __('View Course') }}</a>
+                    <div class="border p-4 rounded-xl border-accent-500">
+                        <p class="py-2 font-bold lg:text-xl">{{ $course->name }}</p>
+                        <a href="{{route('cursos.class', $course->id)}}" class="bg-accent-300 p-2 rounded-xl">{{ __('View Course') }}</a>
                     </div>
                 @endforeach
-                </div>
+            </div>
         @else
-            <p>{{ __('No completed courses yet.') }}</p>
+            <p class="py-4">{{ __('No completed courses yet.') }}</p>
         @endif
 
     </div>

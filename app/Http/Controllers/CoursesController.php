@@ -175,7 +175,7 @@ class CoursesController extends Controller
         
         $coursesByCategory = $courses->groupBy('category');
 
-        return view('dashboard.cursos', compact('courses', 'coursesByCategory'));
+        return view('pages.dashboard.cursos', compact('courses', 'coursesByCategory'));
         
     }
 
@@ -217,7 +217,7 @@ class CoursesController extends Controller
         $query->orderBy('date')->orderBy('start_time');
     }])->findOrFail($courseId);
 
-    return view('dashboard.courses.classes', compact('course'));
+    return view('pages.courses.classes', compact('course'));
 }
 
     public function home()

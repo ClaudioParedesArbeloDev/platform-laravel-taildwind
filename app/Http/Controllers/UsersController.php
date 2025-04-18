@@ -119,7 +119,7 @@ class UsersController extends Controller
         $user = User::with('roles')->findOrFail($id);
         $roles = Role::all();
 
-        return view('users.edit', compact('user', 'roles'));
+        return view('pages.dashboard.admin.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)

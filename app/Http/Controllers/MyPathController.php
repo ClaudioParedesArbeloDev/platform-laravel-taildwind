@@ -9,6 +9,6 @@ class MyPathController extends Controller
 {
     public function index()
     {
-        return view('dashboard.mypath');
+        return view('pages.dashboard.mypath');
     }
 }
