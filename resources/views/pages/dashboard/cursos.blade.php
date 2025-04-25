@@ -4,7 +4,7 @@
     
 @section('content')
 
-    <div class="flex flex-wrap justify-center items-center h-full">
+    <div class="flex flex-wrap text-text-900 justify-center items-center h-full">
         
         @foreach ($coursesByCategory as $category => $courses)
             <div class="coursesWrapper">   

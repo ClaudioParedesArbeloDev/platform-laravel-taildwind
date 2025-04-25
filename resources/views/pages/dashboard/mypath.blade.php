@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="flex flex-col items-center font-three">
+    <div class="flex flex-col text-text-900 items-center font-three">
         <h2 class="font-bold text-xl py-4 lg:text-2xl lg:p-8">{{ __('My Learning Path') }}</h2>
 
         @php

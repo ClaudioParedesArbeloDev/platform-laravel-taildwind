@@ -24,16 +24,16 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                <tr class="text-left text-xs lg:text-sm ">
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->lastname }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->address }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->phone }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->dni }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->email }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->date_birth }}</td>
-                    <td class="hidden lg:table-cell py-2">{{ $user->username }}</td>
-                    <td><a href="/users/{{$user->id}}">{{__('Edit')}}</a></td>
+                <tr class="text-left text-xs lg:text-sm odd:bg-accent-100 even:bg-accent-300">
+                    <td class="py-4">{{ $user->name }}</td>
+                    <td class="py-4">{{ $user->lastname }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->address }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->phone }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->dni }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->email }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->date_birth }}</td>
+                    <td class="hidden lg:table-cell py-4">{{ $user->username }}</td>
+                    <td ><a class="bg-accent2-500 p-2 rounded-md  text-center" href="/users/{{$user->id}}">{{__('Edit')}}</a></td>
                 </tr>
                 @endforeach
             </tbody>

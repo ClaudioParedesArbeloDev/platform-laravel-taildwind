@@ -17,7 +17,7 @@ class CoursesController extends Controller
         $courses = Course::with('user')
             ->orderBy('category', 'asc')
             ->paginate(10);
-        return view('courses.courses', compact('courses'));
+        return view('pages.courses.courses', compact('courses'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class CoursesController extends Controller
             $query->whereIn('name', ['admin', 'instructor']);
         })->get();
     
-        return view('courses.create', compact('users'));
+        return view('pages.courses.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -66,7 +66,7 @@ class CoursesController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
-        return view('courses.course', compact('course', 'id'));
+        return view('pages.courses.course', compact('course', 'id'));
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class CoursesController extends Controller
             $query->whereIn('name', ['admin', 'instructor']);
         })->get();
 
-        return view('courses.edit', compact('course', 'users', 'id'));
+        return view('pages.courses.edit', compact('course', 'users', 'id'));
     }
 
     public function update(Request $request, $id)

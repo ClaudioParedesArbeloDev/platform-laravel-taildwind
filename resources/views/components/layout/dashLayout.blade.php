@@ -60,7 +60,7 @@
                                 <span class="sidebar-text">{{__('more courses')}}</span>
                             </a>
                         </li>
-                        <li>
+                      {{--   <li>
                             <a href="#" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">
                                 <span class="material-symbols-outlined">notifications</span>
                                 <span class="sidebar-text">{{__('notifications')}}</span>
@@ -71,7 +71,7 @@
                                 <span class="material-symbols-outlined">forum</span>
                                 <span class="sidebar-text">{{__('chat')}}</span>
                             </a>
-                        </li>
+                        </li> --}}
                         @if(Auth::user()->roles->contains('name', 'admin'))
                             <li>
                                 <a href="{{route('admin')}}" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">

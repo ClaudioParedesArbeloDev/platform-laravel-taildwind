@@ -1,71 +1,82 @@
-@extends('layouts.dashLayouts')
+@extends('components.layout.dashLayout')
 
 @section('title', 'Code & Lens - Create Course')
 
 @section('content')
+<div class="formWrapper mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-6 text-text-900">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="titleCreate text-2xl font-bold sm:text-3xl">{{ __('Create Course') }}</h2>
+        <a class="btnBack flex items-center text-blue-600 hover:text-blue-800 transition-colors" href="{{ route('admin') }}">
+            <i class="fa-solid fa-arrow-rotate-left mr-2"></i> {{ __('Back') }}
+        </a>
+    </div>
 
-<link rel="stylesheet" href="{{asset('sass/courses/create/create.css')}}">
-<div class="formWrapper">
-<h2 class="titleCreate">{{__('Create Course')}}</h2>
-<a class="btnBack" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-<form 
-    action="{{route('courses.index')}}" 
-    method="POST" class="formCreate"
-    enctype="multipart/form-data"
-    >
-    @csrf
-    <label class="formLabel" for="name">{{__('Title')}}:</label>
-        
-    <input class="formInput" type="text" id="name" name="name" >
-    
-    <label class="formLabel" for="description">{{__('Description')}}:</label>
-    
-    <input class="formInput" type="text"  id="description" name="description" >
+    <form action="{{ route('courses.index') }}" method="POST" class="formCreate space-y-6" enctype="multipart/form-data">
+        @csrf
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="name">{{ __('Title') }}:</label>
+            <input class="formInput mt-1 block w-full lg:w-200 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="name" name="name" required>
+        </div>
 
-    <label class="formLabel" for="price">{{__('Price')}}:</label>
-    
-    <input class="formInput" type="text" id="price" name="price" >
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="description">{{ __('Description') }}:</label>
+            <textarea class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="description" name="description" rows="4"></textarea>
+        </div>
 
-    <label class="formLabel" for="days1">{{__('Days1')}}:</label>
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="price">{{ __('Price') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="number" step="0.01" id="price" name="price">
+        </div>
 
-    <input class="formInput" type="text" id="days1" name="days1" >
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="days1">{{ __('Days1') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="days1" name="days1">
+        </div>
 
-    <label class="formLabel" for="days2">{{__('Days2')}}:</label>
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="days2">{{ __('Days2') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="days2" name="days2">
+        </div>
 
-    <input class="formInput" type="text" id="days2" name="days2" >
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="duration">{{ __('Duration') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="duration" name="duration">
+        </div>
 
-    <label class="formLabel" for="duration">{{__('Duration')}}:</label>
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="category">{{ __('Category') }}:</label>
+            <select name="category" id="category" class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                <option value="programacion">{{ __('Programming') }}</option>
+                <option value="fotografia">{{ __('Photography') }}</option>
+                <option value="filmmaking">{{ __('Filmmaking') }}</option>
+            </select>
+        </div>
 
-    <input class="formInput" type="text" id="duration" name="duration" >
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel flex items-center text-sm font-medium" for="active">
+                <input type="checkbox" id="active" name="active" value="1" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2">
+                {{ __('Active') }}
+            </label>
+        </div>
 
-    <label class="formLabel" for="category">{{__('Category')}}:</label>
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium" for="user_id">{{ __('Instructor') }}:</label>
+            <select class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="user_id" name="user_id" required>
+                <option value="">{{ __('Select an instructor') }}</option>
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
-    <select name="category" id="category" class="formInput">
-        <option value="programacion">{{__('Programming')}}</option>
-        <option value="fotografia">{{__('Photography')}}</option>
-        <option value="filmmaking">{{__('Filmmaking')}}</option>
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="image">{{ __('Image') }}:</label>
+            <input class="formInput mt-1 block w-full text-sm p-2 border border-gray-300 rounded-md cursor-pointer focus:outline-none" type="file" id="image" name="image" accept="image/*">
+        </div>
 
-    <label class="formLabel" for="active">{{__('Active')}}:</label>
-    
-    <input type="checkbox" id="active" name="active" value="1" checked>
-
-
-    <label class="formLabel" for="instructor">{{__('Instructor')}}:</label>
-
-    <select class="formInput" id="user_id" name="user_id" required>
-    <option value="">{{__('Select an instructor')}}</option>
-    @foreach($users as $user)
-        <option value="{{ $user->id }}">{{ $user->name }}</option>
-    @endforeach
-    </select>
-
-    <label class="formLabel" for="image">{{__('Image')}}:</label>
-    
-    <input class="formInput" type="file" id="image" name="image"  accept="image/*">
-        
-    <button class="formButton" type="submit">{{__('Create')}}</button>
-    
-</form>
+        <div class="flex justify-end">
+            <button class="formButton px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors" type="submit">{{ __('Create') }}</button>
+        </div>
+    </form>
 </div>
-
 @endsection

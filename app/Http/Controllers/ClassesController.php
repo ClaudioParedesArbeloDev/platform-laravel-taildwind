@@ -22,13 +22,13 @@ class ClassesController extends Controller
     
     $course = $classes->isNotEmpty() ? $classes->first()->course : null;
 
-    return view('dashboard.courses.classes', compact('classes', 'course'));
+    return view('pages.courses.classes', compact('classes', 'course'));
 }
 
     public function create()
     {
         $courses = Course::all();
-        return view('dashboard.courses.classesCreate', compact('courses'));
+        return view('pages.courses.classesCreate', compact('courses'));
     }
 
     public function store(Request $request)

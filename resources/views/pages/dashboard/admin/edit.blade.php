@@ -13,48 +13,48 @@
 
         @method('PUT')
         <div class="flex justify-end my-2">
-            <label for="name" class="py-2 text-xs lg:text-xl">{{__('Name')}}:</label>
+            <label for="name" class="p-2 text-xs lg:text-xl">{{__('Name')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-50 lg:text-xl lg:w-100" type="text" id="name" name="name" value="{{$user->name}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs  lg:text-xl" for="lastname">{{__('Lastname')}}:</label>
+            <label class="p-2 text-xs  lg:text-xl" for="lastname">{{__('Lastname')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-50 lg:text-xl lg:w-100" type="text"  id="lastname" name="lastname" value="{{$user->lastname}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs lg:text-xl" for="address">{{__('Address')}}:</label>
+            <label class="p-2 text-xs lg:text-xl" for="address">{{__('Address')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-50 lg:text-xl lg:w-100" type="text" id="address" name="address" value="{{$user->address}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label for="phone" class="py-2 text-xs lg:text-xl">{{__('Phone')}}:</label>
+            <label for="phone" class="p-2 text-xs lg:text-xl">{{__('Phone')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-50 lg:text-xl lg:w-100" type="text" id="phone" name="phone" value="{{$user->phone}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs text-end lg:text-xl" for="email">{{__('Email')}}:</label>
+            <label class="p-2 text-xs text-end lg:text-xl" for="email">{{__('Email')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-55 lg:text-xl lg:w-100" type="text" id="email" name="email" value="{{$user->email}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs lg:text-xl" for="dni">DNI:</label>
+            <label class="p-2 text-xs lg:text-xl" for="dni">DNI:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-50 lg:text-xl lg:w-100" type="text" id="dni" name="dni" value="{{$user->dni}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs text-end lg:text-xl" for="date_birth">{{__('Date of Birth')}}:</label>
+            <label class="p-2 text-xs text-end lg:text-xl" for="date_birth">{{__('Date of Birth')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-60 lg:text-xl lg:w-100" type="text" id="date_birth" name="date_birth" value="{{$user->date_birth}}">
         </div>
 
         <div class="flex justify-end my-2">
-            <label class="py-2 text-xs text-end lg:text-xl" for="username">{{__('Username')}}:</label>
+            <label class="p-2 text-xs text-end lg:text-xl" for="username">{{__('Username')}}:</label>
             <input class="py-2 text-xs bg-accent-300 p-2 rounded-md w-55 lg:text-xl lg:w-100" type="text" id="username" name="username" value="{{$user->username}}">
         </div>
         
         <div class="mb-8 flex justify-end my-2"">
-            <label class="py-2 text-xs lg:text-xl" for="role">{{ __('Role') }}:</label>
-            <select class="py-2 text-xs bg-accent-300 rounded-xs p-2 lg:text-xl" id="role" name="role">
+            <label class="p-2 text-xs lg:text-xl" for="role">{{ __('Role') }}:</label>
+            <select class="py-2 text-xs bg-accent-300 rounded-xs w-55 p-2 lg:text-xl" id="role" name="role">
                 @foreach($roles as $role)
                     <option  value="{{ $role->id }}" 
                         {{ $user->roles->pluck('id')->contains($role->id) ? 'selected' : '' }}>
