@@ -17,9 +17,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Verificar si el usuario está autenticado y tiene el rol "admin"
+        
         if (!$request->user() || !$request->user()->roles()->where('name', 'admin')->exists()) {
-            abort(403, 'Unauthorized'); // Retornar error 403 si no es admin
+            abort(403, 'Unauthorized');
         }
 
         return $next($request);

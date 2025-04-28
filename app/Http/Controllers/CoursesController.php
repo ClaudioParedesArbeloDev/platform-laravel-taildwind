@@ -180,14 +180,15 @@ class CoursesController extends Controller
     }
 
     public function showStudents($courseId)
-    {
-        $course = Course::with(['students' => function($query) {
-            $query->orderBy('lastname', 'asc');
-        }])->findOrFail($courseId);
+{
+    $course = Course::findOrFail($courseId);
+    $students = $course->students()
+        ->withPivot('status')
+        ->orderBy('lastname', 'asc')
+        ->paginate(15); 
 
-
-        return view('dashboard.courses.students', compact('course'));
-    }
+    return view('pages.courses.students', compact('course', 'students'));
+}
 
     public function updateStatus(Request $request, $courseId, $userId)
     {
@@ -206,9 +207,10 @@ class CoursesController extends Controller
     public function showClasses($courseId)
 {
     $course = Course::findOrFail($courseId);  
-    $classes = $course->classes; 
+    $classes = $course->classes()
+        ->paginate(10);
 
-    return view('dashboard.courses.classesCourse', compact('course', 'classes'));
+    return view('pages.courses.classesCourse', compact('course', 'classes'));
 }
 
     public function showClassesStudents($courseId)

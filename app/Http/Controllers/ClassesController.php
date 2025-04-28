@@ -68,17 +68,20 @@ class ClassesController extends Controller
     {
         $classes = Classes::findOrFail($id);
 
-        $classes->title = $request->title;
-        $classes->date = $request->date;
-        $classes->start_time = $request->start_time;
-        $classes->pdf = $request->pdf;
-        $classes->powerpoint = $request->powerpoint;
-        $classes->video = $request->video;
-        $classes->meet_link = $request->meet_link;
+        $classes->update([
+            'title' => $request->title,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'pdf' => $request->pdf,
+            'powerpoint' => $request->powerpoint,
+            'video' => $request->video,
+            'meet_link' => $request->meet_link,
+        ]);
 
-        $classes->save();
+        $courseId = $classes->course_id;
 
-        return redirect()->route('cursos.classes', $id);
+        return redirect()   ->route('cursos.classes', $courseId)
+                            ->with('success', 'Clase actualizada correctamente');
     }
 
     public function destroy($id)
