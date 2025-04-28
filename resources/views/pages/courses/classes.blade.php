@@ -1,6 +1,6 @@
 @extends('components.layout.dashLayout')
 
-@section('title', 'Code & Lens - Dashboard')
+@section('title', 'Code & Lens - Classes')
 
 @section('content')
     <div class="font-four text-text-900 flex flex-col items-center justify-center h-full px-4 lg:px-8">
