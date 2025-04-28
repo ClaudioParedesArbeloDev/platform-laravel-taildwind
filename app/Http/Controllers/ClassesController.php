@@ -12,18 +12,18 @@ use Illuminate\Support\Facades\Mail;
 class ClassesController extends Controller
 {
     public function index()
-{
-    $classes = Classes::with('course')
-        ->join('courses', 'classes.course_id', '=', 'courses.id')
-        ->orderBy('courses.name', 'asc')
-        ->select('classes.*')
-        ->get();
+    {
+        $classes = Classes::with('course')
+            ->join('courses', 'classes.course_id', '=', 'courses.id')
+            ->orderBy('courses.name', 'asc')
+            ->select('classes.*')
+            ->get();
 
     
-    $course = $classes->isNotEmpty() ? $classes->first()->course : null;
+        $course = $classes->isNotEmpty() ? $classes->first()->course : null;
 
-    return view('pages.courses.classes', compact('classes', 'course'));
-}
+        return view('pages.courses.classes', compact('classes', 'course'));
+    }
 
     public function create()
     {

@@ -11,14 +11,17 @@ use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
+
+    //Metodo para mostrar el perfil del usuario
     public function edit()
     {
         $user = auth()->user();
         return view('pages.dashboard.profile', compact('user'));
     }
 
+    //Metodo para actualizar el perfil del usuario
     public function update(Request $request)
-{
+    {
         $user = auth()->user();
 
         $request->validate([
@@ -62,13 +65,13 @@ class ProfileController extends Controller
                 $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)
             );
         
-        // Guarda la referencia en la base de datos
-        $user->avatar()->updateOrCreate(
-            ['user_id' => $user->id],
-            ['avatar' => $avatarName]
-        );
-    }
+            // Guarda la referencia en la base de datos
+            $user->avatar()->updateOrCreate(
+                ['user_id' => $user->id],
+                ['avatar' => $avatarName]
+                );
+            }
 
-    return redirect()->back()->with('success', 'Perfil actualizado correctamente');
-}
+        return redirect()->back()->with('success', 'Perfil actualizado correctamente');
+    }
 }

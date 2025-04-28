@@ -12,6 +12,7 @@ use App\Models\User;
 
 class CoursesController extends Controller
 {
+
     public function index()
     {
         $courses = Course::with('user')
@@ -19,6 +20,7 @@ class CoursesController extends Controller
             ->paginate(10);
         return view('pages.courses.courses', compact('courses'));
     }
+
 
     public function create()
     {
@@ -29,40 +31,42 @@ class CoursesController extends Controller
         return view('pages.courses.create', compact('users'));
     }
 
-    public function store(Request $request)
-{
-    $course = new Course();
 
-    $course->name = $request->name;
-    $course->description = $request->description;
-    $course->image = $request->image;
-    $course->price = $request->price;
-    $course->days1 = $request->days1;
-    $course->days2 = $request->days2;
-    $course->duration = $request->duration;
-    $course->category = $request->category;
-    $course->capacity = $request->capacity;
-    $course->user_id = $request->user_id;
-    $course->active = $request->active;
+    public function store(Request $request)
+    {
+        $course = new Course();
+
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->image = $request->image;
+        $course->price = $request->price;
+        $course->days1 = $request->days1;
+        $course->days2 = $request->days2;
+        $course->duration = $request->duration;
+        $course->category = $request->category;
+        $course->capacity = $request->capacity;
+        $course->user_id = $request->user_id;
+        $course->active = $request->active;
     
 
 
-    if ($request->hasFile('image')) {
-        $imageName = time().'.'.$request->image->extension(); 
-        $request->image->storeAs('courses', $imageName, 'public');
-        $course->image = $imageName; 
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension(); 
+            $request->image->storeAs('courses', $imageName, 'public');
+            $course->image = $imageName; 
+        }
+
+
+    
+    
+        $course->save();
+
+    
+    
+        return redirect()->route('courses.index');
     }
 
-
     
-    
-    $course->save();
-
-    
-    
-    return redirect()->route('courses.index');
-}
-
     public function show($id)
     {
         $course = Course::findOrFail($id);
@@ -180,15 +184,15 @@ class CoursesController extends Controller
     }
 
     public function showStudents($courseId)
-{
-    $course = Course::findOrFail($courseId);
-    $students = $course->students()
-        ->withPivot('status')
-        ->orderBy('lastname', 'asc')
-        ->paginate(15); 
+    {
+        $course = Course::findOrFail($courseId);
+        $students = $course->students()
+            ->withPivot('status')
+            ->orderBy('lastname', 'asc')
+            ->paginate(15); 
 
-    return view('pages.courses.students', compact('course', 'students'));
-}
+        return view('pages.courses.students', compact('course', 'students'));
+    }
 
     public function updateStatus(Request $request, $courseId, $userId)
     {
@@ -205,28 +209,28 @@ class CoursesController extends Controller
     }
 
     public function showClasses($courseId)
-{
-    $course = Course::findOrFail($courseId);  
-    $classes = $course->classes()
-        ->paginate(10);
+    {
+        $course = Course::findOrFail($courseId);  
+        $classes = $course->classes()
+            ->paginate(10);
 
-    return view('pages.courses.classesCourse', compact('course', 'classes'));
-}
+        return view('pages.courses.classesCourse', compact('course', 'classes'));
+    }
 
     public function showClassesStudents($courseId)
-{
-    $course = Course::with(['classes' => function ($query) {
+    {
+        $course = Course::with(['classes' => function ($query) {
         $query->orderBy('date')->orderBy('start_time');
-    }])->findOrFail($courseId);
+        }])->findOrFail($courseId);
 
-    return view('pages.courses.classes', compact('course'));
-}
+        return view('pages.courses.classes', compact('course'));
+    }
 
     public function home()
-{
-    $courses = Course::inRandomOrder()->get();
-    return view('pages.home', compact('courses'));
-}
+    {
+        $courses = Course::inRandomOrder()->get();
+        return view('pages.home', compact('courses'));
+    }
 
 
 
