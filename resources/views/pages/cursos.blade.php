@@ -8,7 +8,7 @@
     @foreach ($coursesByCategory as $category => $courses)
         <div>
             @foreach ($courses as $course)
-                <div class="flex flex-col w-60 lg:w-80 mb-4 bg-accent2-500 border border-accent2-500 shadow-2xs rounded-xl  ">
+                <div class="flex flex-col w-60 lg:flex-row lg:w-80 mb-4 bg-accent2-500 border border-accent2-500 shadow-2xs rounded-xl  ">
                     <div class="p-4 md:p-5">
                         <p class="text-text-900">Categoria: {{$course->category}}</p>
                         <h3 class="text-lg font-bold text-text-900 ">

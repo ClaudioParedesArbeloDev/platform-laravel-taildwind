@@ -1,9 +1,9 @@
 <?php
 
 
-use Illuminate\Support\Facades\Auth;
+/* use Illuminate\Support\Facades\Auth; */
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
+/* use Illuminate\Support\Facades\Mail; */
 
 
 use App\Http\Controllers\UsersController;
@@ -18,9 +18,10 @@ use App\Http\Controllers\MyPathController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\LocaleCookie;
-use App\Http\Middleware\IsAdmin;
+
+/* use App\Http\Middleware\IsAdmin;
 use App\Mail\ContactMailable;
-use App\Mail\HomeworkLinkUpdated;
+use App\Mail\HomeworkLinkUpdated; */
 
 
 
@@ -31,8 +32,10 @@ Route::get('/locale/{locale}', function ($locale) {
 
 Route::middleware(LocaleCookie::class)->group(function () {
 
+
     Route::get('/', [CoursesController::class, 'home'])
         ->name('home');
+
 
     
     //Routes of users
@@ -57,6 +60,8 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])
         ->name('users.destroy')->middleware(['auth', 'is.admin']); 
 
+
+
     //Routes of blogs
     Route::get('/blogs', [BlogController::class, 'index'])
         ->name('blogs.index');
@@ -79,6 +84,8 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::delete('/blogs/{id}', [BlogController::class, 'destroy'])
         ->name('blogs.destroy')->middleware(['auth', 'is.admin']);
     
+
+
     //Routes of courses
    Route::get('/courses', [CoursesController::class, 'index'])
         ->name('courses.index');
@@ -107,6 +114,7 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::get('/cursos/{id}', [CoursesController::class, 'cursoDetail'])
         ->name('cursos.detail');
 
+
     
      //Routes of classes
     Route::get('/dashboard/classes', [ClassesController::class, 'index'])
@@ -130,8 +138,11 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::delete('/dashboard/classes/{id}', [ClassesController::class, 'destroy'])
         ->name('classes.destroy')->middleware(['auth', 'is.admin']);
     
+
         
     //Route of logins
+
+
     Route::get('/login', [LoginController::class, 'login'])
         ->name('login')->middleware('guest');
     
@@ -148,6 +159,7 @@ Route::middleware(LocaleCookie::class)->group(function () {
         ->name('check-username');
 
 
+
     //Routes of home
     Route::get('/about', [AboutUsController::class, 'index'])
         ->name('about');
@@ -162,6 +174,7 @@ Route::middleware(LocaleCookie::class)->group(function () {
         })->name('success');
         
         
+
     //Routes Password Reset
     Route::get('/forgot-password', function () {return view('auth.email');})
         ->middleware('guest')->name('password.request');
@@ -176,8 +189,9 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
         ->middleware('guest')->name('password.update');
 
-    //Routes of dashboard
 
+
+    //Routes of dashboard
     Route::get('/pages/dashboard/admin', [AdminController::class, 'index'])
         ->name('admin')->middleware(['auth', 'is.admin']);
 

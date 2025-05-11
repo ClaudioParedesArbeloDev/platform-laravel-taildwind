@@ -18,7 +18,7 @@
             @foreach ($blogs as $blog)
                 <div class="flex flex-col lg:w-5/6 lg:col-end-1 lg:items-center lg:flex-row">
                     <div class="flex w-full justify-center items-center py-4">
-                        <img src="{{ $blog->image }}" alt="blogImage" class="w-90 object-cover h-50 lg:w-100 lg:h-auto">
+                        <img src="{{ $blog->image }}" alt="blogImage" class="w-90 object-scale-down h-50 lg:w-100 lg:h-60 lg:mr-12">
                     </div>
                     <div>
                         <h3 class="font-one text-start font-bold lg:text-2xl">{{ $blog->title }}</h3>
