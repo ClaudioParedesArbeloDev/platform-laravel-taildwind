@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
@@ -196,11 +197,9 @@ class CoursesController extends Controller
 
     public function updateStatus(Request $request, $courseId, $userId)
     {
-        // Obtén el estudiante y el curso
         $course = Course::findOrFail($courseId);
         $user = User::findOrFail($userId);
 
-        // Actualiza el estado en la tabla pivot
         $course->students()->updateExistingPivot($user->id, [
             'status' => $request->status
         ]);
@@ -219,11 +218,14 @@ class CoursesController extends Controller
 
     public function showClassesStudents($courseId)
     {
-        $course = Course::with(['classes' => function ($query) {
-        $query->orderBy('date')->orderBy('start_time');
-        }])->findOrFail($courseId);
+        $course = Course::findOrFail($courseId);
 
-        return view('pages.courses.classes', compact('course'));
+        $classes = Classes::where('course_id', $courseId)
+            ->orderByDesc('date')
+            ->orderBy('start_time')
+            ->paginate(14);
+
+        return view('pages.courses.classes', compact('course', 'classes'));
     }
 
     public function home()

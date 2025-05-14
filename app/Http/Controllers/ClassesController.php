@@ -97,9 +97,9 @@ class ClassesController extends Controller
         Mail::to('claudioparedesarbelo@gmail.com')
             ->send(new HomeworkMailable($request->all()));
 
-        session()->flash('message', 'Su tarea ha sido enviada');
+        
 
-        return back();
+        return redirect()->back()->with('message', 'Su tarea ha sido enviada');
     }
 
    

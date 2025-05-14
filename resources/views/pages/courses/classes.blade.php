@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($course->classes as $class)
+                    @foreach ($classes as $class)
                     <tr class="border-b hover:bg-background-300 leading-6">
                         <td class="py-2 px-2 lg:py-3 lg:px-4">{{ \Carbon\Carbon::parse($class->date)->translatedFormat('j \d\e F') }}</td>
                         <td class="hidden lg:table-cell py-2 px-2 lg:py-3 lg:px-4">{{ \Carbon\Carbon::parse($class->start_time)->format('H:i') }}</td>
@@ -56,7 +56,7 @@
                         </td>
                         <td class="hidden lg:table-cell py-2 px-2 lg:py-3 lg:px-4">
                             @if ($class->work == 1)
-                                <form action="{{ route('cursos.homework') }}" method="POST" class="flex items-center gap-2">
+                                <form action="{{ route('cursos.homework') }}" method="POST" class="flex items-center gap-2" id="homeworkForm">
                                     @csrf
                                     <input type="hidden" name="user" value="{{ Auth::user()->lastname }}.{{ Auth::user()->name }}">
                                     <input type="hidden" name="course_id" value="{{ $course->name }}">
@@ -69,7 +69,29 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-6 flex justify-center">
+                <div class="inline-flex items-center gap-2 rounded-lg bg-background-100 text-text-900 p-2 shadow-md">
+                    {{ $classes->links() }}
+                </div>
+            </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.getElementById('homeworkForm');
+
+                form.addEventListener('submit', function (e) {
+                    Swal.fire({
+                        title: 'Enviando...',
+                        text: 'Por favor espera un momento.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                        Swal.showLoading();
+                        }
+                    });
+                });
+            });
+        </script>
+
 
         @if (session('message'))
             <script>
