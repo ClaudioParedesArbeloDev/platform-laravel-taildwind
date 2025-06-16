@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Auth0ManualController;
 /* use Illuminate\Support\Facades\Auth; */
 use Illuminate\Support\Facades\Route;
 /* use Illuminate\Support\Facades\Mail; */
@@ -36,7 +36,9 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::get('/', [CoursesController::class, 'home'])
         ->name('home');
 
-
+    Route::get('/auth0-login', [Auth0ManualController::class, 'login'])->name('auth0-login');
+    Route::get('/auth0-callback', [Auth0ManualController::class, 'callback'])->name('auth0-callback');
+    
     
     //Routes of users
     Route::get('/users', [UsersController::class, 'index'])

@@ -37,6 +37,13 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+
+        $returnTo = urlencode(env('AUTH0_LOGOUT_RETURN_TO', url('/')));
+        $clientId = env('AUTH0_CLIENT_ID');
+        $domain = env('AUTH0_DOMAIN');
+
+        $logoutUrl = "https://{$domain}/v2/logout?client_id={$clientId}&returnTo={$returnTo}";
+
+        return redirect($logoutUrl);
     }
 }

@@ -105,9 +105,21 @@
 
             <input type="hidden" name="redirect" value="{{ request()->get('redirect', route('success')) }}">
             <div class="flex justify-center m-8">
-                <button type="submit" class="flex justify-center items-center border-2 p-2 bg-accent-700 text-text-100 rounded-xl">{{ __('Register') }}</button>
+                <button type="submit" 
+                    class="g-recaptcha flex justify-center items-center border-2 p-2 bg-accent-700 text-text-100 rounded-xl"
+                     data-sitekey="6LdEC2MrAAAAAMRnpaI1B9OobpvzkV1fDg1Q--Wy" 
+                    data-callback='onSubmit' 
+                    data-action='submit'>
+                    {{ __('Register') }}
+                </button>
             </div>
         </form>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+            function onSubmit(token) {
+            document.getElementById("demo-form").submit();
+            }
+        </script>
     </div>
 </div>
     @vite('resources/js/login.js')
