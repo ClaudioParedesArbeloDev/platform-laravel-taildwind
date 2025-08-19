@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fuentes y Estilos -->
+    
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://kit.fontawesome.com/718dcffbc3.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Tailwind CSS -->
+    
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/theme.js'])
 
 
@@ -19,30 +20,33 @@
 </head>
 
 
-<body class="grid grid-rows-[auto_1fr_auto] min-h-screen  bg-background-100">
+<body class="bg-background-300 grid grid-rows-[auto_1fr_auto] min-h-screen">
 
     <!-- Header de version Desktop -->
-    <header class= "hidden lg:flex bg-background-300 text-text-900 justify-around items-center p-4 h-35">
-        <a href="{{route('home')}}">
-            <p class="font-two text-xl">Code & Lens</p>
-            <p class="font-one text-sm tracking-[10px]">PLATFORM</p>
+    <header class= "hidden lg:flex bg-background-500 text-text-900 justify-around items-center p-4 h-35">
+        <a href="{{route('home')}}" class="flex items-center">
+            <img src="./images/logo.png" alt="logo" class="m-4 w-15">
+            <div class="flex flex-col hover:text-variant-100 transition-colors duration-300 transform">
+                <p class="font-two font-bold text-md text-shadow-lg">Code & Lens</p>
+                <p class="uppercase text-xs tracking tracking-[9px]">platform</p>
+            </div>
         </a>
 
         <!-- Barra de navegación de version Desktop -->
-        <nav class= "flex list-none gap-x-10 uppercase">
-            <a href="{{route('home')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+        <nav class= "font-five flex list-none gap-x-10 uppercase">
+            <a href="{{route('home')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('home') }}</li>
             </a>
-            <a href="{{route('cursos')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+            <a href="{{route('cursos')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('courses') }}</li>
             </a>
-            <a href="{{route('blogs.index')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+            <a href="{{route('blogs.index')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('Blog') }}</li>
             </a>
-            <a href="{{route('about')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+            <a href="{{route('about')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('about') }}</li>
             </a>
-            <a href="{{route('contact.index')}}" class= "p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+            <a href="{{route('contact.index')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('contact') }}</li>
             </a>
         </nav>
@@ -50,7 +54,7 @@
         <!-- Botón de Login -->
         <div class= "flex gap-x-10 items-center">
             @guest
-                <a href="{{route('login')}}" class= "flex p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-accent2-500">
+                <a href="{{route('login')}}" class= "flex p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-variant-100">
                     <i class="fa-solid fa-user"></i>
                     <p class="ml-2">{{ __('Log in') }}</p> 
                 </a>
@@ -77,7 +81,7 @@
     </header>
 
     <!-- Header de version Mobile -->
-    <div class="flex justify-between items-center bg-background-300 text-text-900 p-4 lg:hidden">
+    <div class="flex justify-between items-center bg-background-500 text-text-900 p-4 lg:hidden">
         <a href="{{route('home')}}">
             <p class="font-two text-md">Code & Lens</p>
             <p class="font-one text-xs tracking-[7px]">PLATFORM</p>
@@ -87,8 +91,8 @@
         <i class="fa-solid fa-bars cursor-pointer" id="menu-toggle"></i>
 
         <!-- Menú móvil (oculto por defecto) -->
-        <div id="mobile-menu" class="fixed inset-0 p-8 bg-text-700 bg-opacity-90 transform translate-x-full transition-transform duration-300 flex flex-col items-end justify-center space-y-4">
-            <button id="menu-close" class="bg-trasparent text-3xl text-background-100 rounded">
+        <div id="mobile-menu" class="fixed inset-0 p-8 bg-background-500 bg-opacity-90 transform translate-x-full transition-transform duration-300 flex flex-col items-end justify-center space-y-4">
+            <button id="menu-close" class="bg-trasparent text-3xl text-text-100 rounded">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
@@ -96,7 +100,7 @@
 
             <!-- Opciones del menú -->
             @guest
-                <a href="{{route('login')}}" class= "flex rounded-md duration-300 ease-out text-background-100">
+                <a href="{{route('login')}}" class= "flex rounded-md duration-300 ease-out text-text-100">
                     <i class="fa-solid fa-user"></i>
                     <p class="ml-2">{{ __('Log in') }}</p>
                 </a>
@@ -116,19 +120,19 @@
             @endauth
 
             <nav class= "flex flex-col list-none text-end  uppercase">
-                <a href="{{route('home')}}" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('home')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('home') }}</li>
                 </a>
-                <a href="{{route('cursos')}}" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('cursos')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('courses') }}</li>
                 </a>
-                <a href="{{route('blogs.index')}}" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('blogs.index')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('Blog') }}</li>
                 </a>
-                <a href="{{route('about')}}" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('about')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('about') }}</li>
                 </a>
-                <a href="{{route('contact.index')}}" class= "text-background-100 pt-4 pb-4">
+                <a href="{{route('contact.index')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('contact') }}</li>
                 </a>
             </nav>
@@ -147,22 +151,22 @@
 
     
     <!-- Footer -->
-    <footer class="grid grid-cols-3 bg-background-300 lg:p-8 h-30 items-center">
+    <footer class="grid grid-cols-3 bg-background-500 lg:p-8 h-30 items-center justify-items-center">
         <div class="flex gap-x-2 p-1 lg:gap-x-4 items-center">
             <a href="/locale/en"><img src="{{asset('images/england.jpg')}}" alt="England Flag" class="w-10 h-auto"></a>
             <a href="/locale/es"><img src="{{asset('images/spain.jpg')}}" alt="Spain Flag" class="w-10 h-auto"></a>
         </div>
         <p class="font-one text-text-700 text-xs lg:text-sm">Copyright &copy; {{ date('Y') }} Code & Lens Platform</p>
         <div class="flex p-4 flex-wrap justify-center">
-            <a href="https://www.linkedin.com/in/claudioparedesarbelo/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-accent2-500" ><i
+            <a href="https://www.linkedin.com/in/claudioparedesarbelo/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/ClaudioParedesArbeloDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-accent2-500" ><i
+            <a href="https://github.com/ClaudioParedesArbeloDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-github"></i></a>
-            <a href="https://www.instagram.com/claudioparedesdeveloper/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-accent2-500" ><i
+            <a href="https://www.instagram.com/claudioparedesdeveloper/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/ClaudioPDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-accent2-500" ><i
+            <a href="https://x.com/ClaudioPDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://www.youtube.com/@ClaudioParedesDeveloper" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-accent2-500" ><i
+            <a href="https://www.youtube.com/@ClaudioParedesDeveloper" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-youtube"></i></a>
         </div>
     </footer>

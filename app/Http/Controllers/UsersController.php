@@ -12,8 +12,7 @@ use function Laravel\Prompts\password;
 
 class UsersController extends Controller
 {
-    //Este metodo devuelve la lista de usuarios solo para el administrador
-    //los ordena por apellido y tiene paginacion por defecto.
+
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')
@@ -24,8 +23,7 @@ class UsersController extends Controller
     }
 
 
-    //Este metodo devuelve si el usuario ya existe o no
-    //para evitar que se repitan los nombres de usuarios para el chat
+ 
     public function checkUsername(Request $request)
     {
         $username = $request->input('username');
@@ -33,13 +31,13 @@ class UsersController extends Controller
         return response()->json(['exists' => $exists]);
     }
 
-    //Este metodo muestra el formulario de registro
+  
     public function create()
     {
         return view ('auth.register');
     }
 
-    //Este metodo recibe los datos del formulario de registro
+   
     public function store(Request $request)
     {   
         $request->validate([
@@ -115,7 +113,7 @@ class UsersController extends Controller
     }
 
 
-    //Este metodo muestra un usuario en detalle
+    
     public function show($id)
     {
         $user = User::with('roles')->find($id);
@@ -123,7 +121,7 @@ class UsersController extends Controller
         return view('pages.dashboard.admin.user', compact('user'));
     }
 
-    //Este metodo muestra el formulario de edición de un usuario
+   
     public function edit($id)
     {
         $user = User::with('roles')->findOrFail($id);
@@ -132,7 +130,7 @@ class UsersController extends Controller
         return view('pages.dashboard.admin.edit', compact('user', 'roles'));
     }
 
-    //Este metodo sirve para actualizar un usuario
+   
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -153,7 +151,7 @@ class UsersController extends Controller
         return redirect("/users/$id");
     }
 
-    //Este metodo sirve para eliminar un usuario
+    
     public function destroy($id)
     {
         $user = User::find($id);

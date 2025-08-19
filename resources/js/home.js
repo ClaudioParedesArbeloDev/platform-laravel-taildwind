@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
         currentIndex = (currentIndex + 1) % courses.length;
     }
 
-    // Mostrar el primer curso inmediatamente
+
     showNextCourse();
 
-    // Cambiar cada 5 segundos
+
     setInterval(showNextCourse, 5000);
 }); 

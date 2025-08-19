@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {   
-    // Esta funcion muestra la lista de blogs
+    
     public function index()
     {
         $blogs= Blog::orderBy('created_at', 'desc')
@@ -18,13 +18,13 @@ class BlogController extends Controller
         return view ('pages.blogs', compact('blogs'));
     }
 
-    // Esta funcion muestra el formulario para crear un blog
+    
     public function create()
     {
         return view ('pages.blog.create');
     }
 
-    // Esta funcion recibe el formulario y guarda el blog
+    
     public function store(Request $request)
 
     {
@@ -45,14 +45,14 @@ class BlogController extends Controller
         return redirect('/blogs');
     }
 
-    // Esta funcion muestra un blog
+    
     public function show(Blog $blog)
     {
         return view ('pages.blog.blog', compact('blog'));
         
     }
 
-    // Esta funcion muestra el formulario para editar un blog
+    
     public function edit(Blog $blog)
 
     {
@@ -60,7 +60,7 @@ class BlogController extends Controller
         return view('blog.editblog', compact('blog'));
     }
 
-    // Esta funcion recibe el formulario y actualiza el blog
+   
     public function update(Request $request, Blog $blog)
     {
 
@@ -75,7 +75,7 @@ class BlogController extends Controller
     }
 
 
-    // Esta funcion elimina un blog
+    
     public function destroy(Blog $blog)
     {
 
