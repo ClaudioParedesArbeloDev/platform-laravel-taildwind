@@ -15,9 +15,9 @@
        
         <h3 class="font-bold text-lg py-4">{{ __('In Progress') }}</h3>
         @if ($inProgressCourses->isNotEmpty())
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap justify-center">
                 @foreach ($inProgressCourses as $course)
-                    <div class="border p-4 rounded-xl border-accent-500">
+                    <div class="border p-4 w-[250px] lg:w-[280px] m-4 rounded-xl border-accent-500">
                         <p class="py-2 font-bold lg:text-xl">{{ $course->name }}</p>
                         <a href="{{route('cursos.class', $course->id)}}" class="bg-accent-300 p-2 rounded-xl">{{ __('View Course') }}</a>
                     </div>
@@ -30,9 +30,9 @@
         
         <h3 class="font-bold text-lg py-4">{{ __('Completed') }}</h3>
         @if ($completedCourses->isNotEmpty())
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap justify-center">
                 @foreach ($completedCourses as $course)
-                    <div class="border p-4 rounded-xl border-accent-500">
+                    <div class="border p-4 w-[250px] lg:w-[280px] m-4 rounded-xl border-accent-500">
                         <p class="py-2 font-bold lg:text-xl">{{ $course->name }}</p>
                         <a href="{{route('cursos.class', $course->id)}}" class="bg-accent-300 p-2 rounded-xl">{{ __('View Course') }}</a>
                     </div>

@@ -7,7 +7,7 @@
 <div class="flex flex-col text-text-900 justify-center h-full items-center">
     <h2 class="font-two lg:text-2xl">{{__('Users List')}}</h2>
     <a class="absolute top-8 right-8" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-        <table class="my-8 w-70 font-one lg:w-6/7">
+        <table class="my-8 w-70 font-five lg:w-6/7">
             <thead>
                 <tr class="text-left text-xs lg:text-xl">
                     <th>{{__('Name')}}</th>

@@ -10,7 +10,7 @@
             <div class="coursesWrapper">   
                 <div class="flex flex-wrap justify-center items-center h-full">
                     @foreach ($courses as $course)
-                        <div class="border p-4 rounded-xl border-accent-500 lg:p-8">
+                        <div class="border p-4 m-4 w-[250px] rounded-xl border-accent-500 lg:p-8 lg:w-[350px]">
                             <div>
                                 <h4 class="font-bold text-xs py-2">{{ $course->category }}</h4>
                             </div>

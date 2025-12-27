@@ -4,11 +4,11 @@
 
 @section('content')
 
-<div class="text-text-900 p-4 font-one flex justify-center">
+<div class="text-text-900 p-4 font-three flex justify-center">
     
     <div class="lg:w-4/6 lg:py-8 flex flex-col">
         <div class="flex justify-end items-center">
-            <a href="{{route('blogs.index')}}" class="bg-accent2-500 text-xs px-4 py-2 hover:bg-accent-500 rounded-md text-text-100">{{__('Back')}}</a>
+            <a href="{{route('blogs.index')}}" class="bg-variant-100 text-xs px-4 py-2 hover:bg-accent1-900 rounded-md text-text-100">{{__('Back')}}</a>
         </div>
         <span class="text-xs uppercase"> {{__( $blog->category )}}</span>
         <h3 class="text-xl font-bold py-4 lg:text-3xl">{{ $blog->title }}</h3>

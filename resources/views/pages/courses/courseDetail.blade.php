@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="text-text-900 flex flex-col font-four p-4 lg:flex-row lg:w-full lg:p-20 lg:justify-center">
+    <div class="text-text-900 flex flex-col font-five p-4 lg:flex-row lg:w-full lg:p-20 lg:justify-center">
         
         <div class="lg:w-1/3 px-10">
             <h3 class="py-2 ">{{$course->category}}</h3>

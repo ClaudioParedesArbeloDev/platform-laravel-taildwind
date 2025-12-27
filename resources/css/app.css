@@ -22,25 +22,25 @@
     --color-text-700: #0D0D0D;
     --color-text-900: #000000;
 
-    --color-accent-100: #FF99C8;
-    --color-accent-300: #F471B5;
-    --color-accent-500: #EB0072;
-    --color-accent-700: #C70061;
-    --color-accent-900: #A30050;
+    --color-accent-100: #F5D5C8;
+    --color-accent-300: #E6B89C;
+    --color-accent-500: #D4956C;
+    --color-accent-700: #B87755;
+    --color-accent-900: #8B5A3C;
 
-    --color-accent1-100: #B3E5FC;
-    --color-accent1-300: #81D4FA;
-    --color-accent1-500: #4FC3F7;
-    --color-accent1-700: #29B6F6;
-    --color-accent1-900: #0288D1;
+    --color-accent1-100: #F5E6D3;
+    --color-accent1-300: #E8D4B5;
+    --color-accent1-500: #D4B896;
+    --color-accent1-700: #B89968;
+    --color-accent1-900: #8B7355;
 
-    --color-accent2-100: #C8E6C9;
-    --color-accent2-300: #A5D6A7;
-    --color-accent2-500: #81C784;
-    --color-accent2-700: #66BB6A;
-    --color-accent2-900: #4CAF50;
+    --color-accent2-100: #E3E8D7;
+    --color-accent2-300: #C8D5B0;
+    --color-accent2-500: #A8B88A;
+    --color-accent2-700: #7A9B6C;
+    --color-accent2-900: #5A7A52;
 
-    --color-variant-100: #EB0072;
+    --color-variant-100: #D4956C;
 }
 
 .dark {
@@ -56,23 +56,24 @@
     --color-text-700: #999999;
     --color-text-900: #FFFFFF;
 
-    --color-accent-100: #FF99C8;
-    --color-accent-300: #F471B5;
-    --color-accent-500: #EB0072;
-    --color-accent-700: #C70061;
-    --color-accent-900: #A30050;
+    --color-accent-100: #E6B89C;
+    --color-accent-300: #D4956C;
+    --color-accent-500: #C17B55;
+    --color-accent-700: #A5633D;
+    --color-accent-900: #8B5A3C;
 
-    --color-accent1-100: #4FC3F7;
-    --color-accent1-300: #29B6F6;
-    --color-accent1-500: #0288D1;
-    --color-accent1-700: #0277BD;
-    --color-accent1-900: #01579B;
+    --color-accent1-100: #E8D4B5;
+    --color-accent1-300: #D4B896;
+    --color-accent1-500: #B89968;
+    --color-accent1-700: #9C7F52;
+    --color-accent1-900: #7A633F;
 
-    --color-accent2-100: #81C784;
-    --color-accent2-300: #66BB6A;
-    --color-accent2-500: #4CAF50;
-    --color-accent2-700: #388E3C;
-    --color-accent2-900: #2E7D32;
+    --color-accent2-100: #C8D5B0;
+    --color-accent2-300: #A8B88A;
+    --color-accent2-500: #8A9F6E;
+    --color-accent2-700: #6B7F55;
+    --color-accent2-900: #4F5F3F;
     
-    --color-variant-100: #EB0072;
+    --color-variant-100: #D4956C;
 }
+

@@ -25,7 +25,7 @@
     <!-- Header de version Desktop -->
     <header class= "hidden lg:flex bg-background-500 text-text-900 justify-around items-center p-4 h-35">
         <a href="{{route('home')}}" class="flex items-center">
-            <img src="./images/logo.png" alt="logo" class="m-4 w-15">
+            <img src="/images/logo.png" alt="logo" class="m-4 w-15">
             <div class="flex flex-col hover:text-variant-100 transition-colors duration-300 transform">
                 <p class="font-two font-bold text-md text-shadow-lg">Code & Lens</p>
                 <p class="uppercase text-xs tracking tracking-[9px]">platform</p>
@@ -67,8 +67,8 @@
                         @else
                             <img src="{{asset('storage/avatars/'.Auth::user()->avatar->avatar)}}" alt="avatar" class="w-10 h-10 m-2 object-cover rounded-full">                    
                         @endif
-                        <pre class="font-four text-sm">{{Auth::user()->name}}</pre>
-                        <pre class="font-four text-sm">{{Auth::user()->lastname}}</pre>        
+                        <pre class="font-five text-sm">{{Auth::user()->name}}</pre>
+                        <pre class="font-five text-sm">{{Auth::user()->lastname}}</pre>        
                     </div>
                 </a>
             @endauth
@@ -113,8 +113,8 @@
                         @else
                             <img src="{{asset('storage/avatars/'.Auth::user()->avatar->avatar)}}" alt="avatar" class="w-20 h-20 m-2 object-cover rounded-full">                    
                         @endif
-                        <pre class="font-four text-text-200 text-sm">{{Auth::user()->name}}</pre>
-                        <pre class="font-four text-text-200 text-sm">{{Auth::user()->lastname}}</pre>        
+                        <pre class="font-five text-text-200 text-sm">{{Auth::user()->name}}</pre>
+                        <pre class="font-five text-text-200 text-sm">{{Auth::user()->lastname}}</pre>        
                     </div>
                 </a>
             @endauth
@@ -156,7 +156,7 @@
             <a href="/locale/en"><img src="{{asset('images/england.jpg')}}" alt="England Flag" class="w-10 h-auto"></a>
             <a href="/locale/es"><img src="{{asset('images/spain.jpg')}}" alt="Spain Flag" class="w-10 h-auto"></a>
         </div>
-        <p class="font-one text-text-700 text-xs lg:text-sm">Copyright &copy; {{ date('Y') }} Code & Lens Platform</p>
+        <p class="font-five text-text-700 text-xs lg:text-sm">Copyright &copy; {{ date('Y') }} Code & Lens Platform</p>
         <div class="flex p-4 flex-wrap justify-center">
             <a href="https://www.linkedin.com/in/claudioparedesarbelo/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-linkedin-in"></i></a>

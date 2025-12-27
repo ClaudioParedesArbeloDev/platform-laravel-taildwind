@@ -3,7 +3,7 @@
 @section('title', 'Code & Lens - Classes')
 
 @section('content')
-    <div class="font-four text-text-900 flex flex-col items-center justify-center h-full px-4 lg:px-8">
+    <div class="font-five text-text-900 flex flex-col items-center justify-center h-full px-4 lg:px-8">
         <h2 class="font-bold p-4 text-lg lg:text-2xl text-center">{{ $course->name }}</h2>
         
         <div class="w-full overflow-x-auto">
