@@ -211,6 +211,7 @@ class CoursesController extends Controller
     {
         $course = Course::findOrFail($courseId);  
         $classes = $course->classes()
+            ->orderBy('date', 'desc')
             ->paginate(10);
 
         return view('pages.courses.classesCourse', compact('course', 'classes'));

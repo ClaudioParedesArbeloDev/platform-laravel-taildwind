@@ -1,4 +1,8 @@
-{ 
+{   
+    "student": "alumno",
+    "choise course": "elegir curso",
+    "attendance": "asistencia",
+    "Availables": "Disponibles",
     "Welcome back!": "¡Bienvenido de nuevo!",
     "Sign in with Google": "Iniciar sesión con Google",
     "or login with email": "o iniciar sesión con correo electrónico",

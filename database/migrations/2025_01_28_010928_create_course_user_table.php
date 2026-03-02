@@ -25,6 +25,9 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('enroll_day')->nullable();
             $table->string('status')->default('in progress');
+
+            $table->unique(['course_id', 'user_id']);
+
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
 <div class="py-16">
     <div class="flex flex-col bg-background-300 text-text-700 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
     
-        <h2 class="font-two text-xl lg:text-2xl p-4 mt-3 text-center">{{ __('Register') }}</h2>
+        <h2 class="font-one text-xl lg:text-2xl p-4 mt-3 text-center">{{ __('Register') }}</h2>
 
         <form action="{{ route('users.index') }}" method="POST" class="formCreate">
             @csrf
@@ -102,24 +102,15 @@
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
-
             <input type="hidden" name="redirect" value="{{ request()->get('redirect', route('success')) }}">
             <div class="flex justify-center m-8">
                 <button type="submit" 
-                    class="g-recaptcha flex justify-center items-center border-2 p-2 bg-accent-700 text-text-100 rounded-xl"
-                     data-sitekey="6LdEC2MrAAAAAMRnpaI1B9OobpvzkV1fDg1Q--Wy" 
                     data-callback='onSubmit' 
                     data-action='submit'>
                     {{ __('Register') }}
                 </button>
             </div>
         </form>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-        <script>
-            function onSubmit(token) {
-            document.getElementById("demo-form").submit();
-            }
-        </script>
     </div>
 </div>
     @vite('resources/js/login.js')

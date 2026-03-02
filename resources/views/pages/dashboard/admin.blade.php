@@ -14,7 +14,9 @@
         <a href="{{route('courses.index')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-2 lg:p-4 lg:rounded-2xl ">{{__('view')}}</a>
         <a href="{{route('courses.create')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-3 lg:p-4 lg:rounded-2xl ">{{__('create')}}</a>
         <li class="list-none font-bold py-2 col-start-1">{{__('classes')}}</li>
-        <a href="{{route('classes.create')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-3 lg:p-4 lg:rounded-2xl ">{{__('create')}}</a>
+        <a href="{{route('classes.create')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-2 lg:p-4 lg:rounded-2xl ">{{__('create')}}</a>
+        <li class="list-none font-bold py-2 col-start-1">{{__('attendance')}}</li>
+        <a href="{{route('attendance.index')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-2 lg:p-4 lg:rounded-2xl ">{{__('choise course')}}</a>
         <li class="list-none font-bold py-2 col-start-1">{{__('blogs')}}</li>
         <a href="{{route('blogs.index')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-2 lg:p-4 lg:rounded-2xl ">{{__('view')}}</a>
         <a href="{{route('blogs.create')}}" class="list-none py-2 border-b-2 border-transparent bg-accent-300 hover:border-accent-500 col-start-3 lg:p-4 lg:rounded-2xl ">{{__('create')}}</a>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RPQYL861V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3RPQYL861V');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
@@ -31,8 +40,8 @@
                     @else
                         <img src="{{asset('storage/avatars/'.Auth::user()->avatar->avatar)}}" alt="avatar" class="w-16 h-16 m-2 object-cover rounded-full">
                     @endif
-                    <pre class="sidebar-text font-four text-sm">{{Auth::user()->name}}</pre>
-                    <pre class="sidebar-text font-four text-sm">{{Auth::user()->lastname}}</pre>
+                    <pre class="sidebar-text font-five text-sm">{{Auth::user()->name}}</pre>
+                    <pre class="sidebar-text font-five text-sm">{{Auth::user()->lastname}}</pre>
                 </div>
 
                 <div class="p-4 flex flex-col items-center">
@@ -97,11 +106,14 @@
                     <span id="theme-icon" class="material-symbols-outlined">dark_mode</span>
                     <span class="sidebar-text">Theme Color</span>
                 </button>
-
-                <div class="flex justify-center items-center">
-                    <img src="{{asset('images/logo.png')}}" alt="logo" class="w-10 h-auto m-2">
-                    <h2 class="sidebar-text font-black">Code & Lens</h2>
-                </div>
+                
+                <a href="{{ route('home') }}">
+                        <div class="flex justify-center items-center">
+                            <img src="{{asset('images/logo.png')}}" alt="logo" class="w-10 h-auto m-2">
+                            <h2 class="sidebar-text font-black">Code & Lens</h2>
+                        </div>
+                </a>
+                
 
                 <div class="flex justify-center gap-x-2 p-1 mb-4 lg:gap-x-4 items-center">
                     <a href="/locale/en"><img src="{{asset('images/england.jpg')}}" alt="England Flag" class="lang w-10 h-auto"></a>
@@ -115,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="flex-1 flex flex-col overflow-hidden">
+            <div class="flex-1 flex flex-col overflow-y-auto">
                 @yield('content')
             </div>
         </div>

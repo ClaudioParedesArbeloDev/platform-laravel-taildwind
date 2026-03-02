@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="flex flex-col w-full h-full justify-center items-center text-text-900 font-four">
+<div class="flex flex-col w-full h-full justify-center items-center text-text-900 font-five">
     <h2 class="font-bold text-xl p-4">{{__('Students')}}</h2>
         <div class="">
             @foreach ($students as $student)

@@ -67,7 +67,7 @@
                 </div>
                 <div class="mt-4 flex items-center justify-between">
                     <span class="border-b w-1/5 md:w-1/4"></span>
-                    <a href="{{route('users.create')}}" class="text-xs text-text-500 uppercase">{{__('or sign up')}}</a>
+                    <a href="{{route('users.create')}}" class="text-xs text-text-500 uppercase cursor-pointer">{{__('or sign up')}}</a>
                     <span class="border-b w-1/5 md:w-1/4"></span>
                 </div>
             </form>
@@ -76,6 +76,6 @@
 </div>
         
 
-    </div>
+
 
 @endsection

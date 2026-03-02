@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Classes;
+use App\Models\Attendance;
 use App\Mail\HomeworkMailable;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,7 +18,7 @@ class ClassesController extends Controller
             ->join('courses', 'classes.course_id', '=', 'courses.id')
             ->orderBy('courses.name', 'asc')
             ->select('classes.*')
-            ->get();
+            -> paginate(10);
 
     
         $course = $classes->isNotEmpty() ? $classes->first()->course : null;
@@ -42,19 +43,33 @@ class ClassesController extends Controller
         $classes->powerpoint = $request->powerpoint;
         $classes->video = $request->video;
         $classes->meet_link = $request->meet_link;
-        $classes->work = $request->has('work')? 1 : 0;
+        $classes->work = $request->has('work') ? 1 : 0;
         $classes->course_id = $request->input('course_id');
 
         $classes->save();
 
-        return redirect()->route('classes.index')->with('success', 'Class created successfully!');
+    
+        $course = Course::with('students')->find($classes->course_id);
+
+        foreach ($course->students as $student) {
+            Attendance::create([
+                'class_id' => $classes->id,
+                'user_id' => $student->id,
+                'present' => false,
+            ]);
+        }
+
+        return redirect()
+            ->route('classes.index')
+            ->with('success', 'Class created successfully!');
     }
+
 
     public function show($id)
     {
         $classes = Classes::findOrFail($id);
 
-        return view('dashboard.courses.class', compact('classes'));
+        return redirect()->route('dashboard');
     }
 
     public function edit($id)
@@ -89,7 +104,7 @@ class ClassesController extends Controller
         $classes = Classes::findOrFail($id);
         $classes->delete();
 
-        return redirect()->route('dashboard.classes.index');
+        return redirect()->route('dashboard');
     }
 
     public function homework(Request $request)

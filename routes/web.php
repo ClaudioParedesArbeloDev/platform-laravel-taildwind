@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth0ManualController;
-/* use Illuminate\Support\Facades\Auth; */
 use Illuminate\Support\Facades\Route;
-/* use Illuminate\Support\Facades\Mail; */
 
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -16,18 +15,15 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyPathController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Middleware\LocaleCookie;
 
-/* use App\Http\Middleware\IsAdmin;
-use App\Mail\ContactMailable;
-use App\Mail\HomeworkLinkUpdated; */
 
-
-
-Route::get('/locale/{locale}', function ($locale) {
-    return redirect()->back()->withCookie('locale', $locale);
-});
+Route::post('/checkout/webhook', [CheckoutController::class, 'webhook'])
+    ->name('checkout.webhook')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
 
 
 Route::middleware(LocaleCookie::class)->group(function () {
@@ -62,7 +58,19 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])
         ->name('users.destroy')->middleware(['auth', 'is.admin']); 
 
+    Route::get('/dashboard/asistencia', [AttendanceController::class, 'index'])
+        ->name('attendance.index')
+        ->middleware(['auth', 'is.admin']);
 
+
+    Route::get('/dashboard/asistencia/{course}', [AttendanceController::class, 'edit'])
+        ->name('attendance.edit')
+        ->middleware(['auth', 'is.admin']);
+
+
+    Route::put('/dashboard/asistencia/{course}', [AttendanceController::class, 'update'])
+        ->name('attendance.update')
+        ->middleware(['auth', 'is.admin']);
 
     //Routes of blogs
     Route::get('/blogs', [BlogController::class, 'index'])
@@ -114,8 +122,24 @@ Route::middleware(LocaleCookie::class)->group(function () {
         ->name('cursos');
 
     Route::get('/cursos/{id}', [CoursesController::class, 'cursoDetail'])
-        ->name('cursos.detail');
+        ->name('cursos.detail'); 
 
+
+
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])
+        ->name('checkout.success');
+
+    Route::get('/checkout/failure', [CheckoutController::class, 'failure'])
+        ->name('checkout.failure');
+
+    Route::get('/checkout/pending', [CheckoutController::class, 'pending'])
+        ->name('checkout.pending');
+
+    Route::get('/checkout/{courseId}', [CheckoutController::class, 'show'])
+        ->name('checkout.show')->middleware('auth');
+
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])
+        ->name('checkout.process')->middleware('auth');
 
     
      //Routes of classes
@@ -143,8 +167,6 @@ Route::middleware(LocaleCookie::class)->group(function () {
 
         
     //Route of logins
-
-
     Route::get('/login', [LoginController::class, 'login'])
         ->name('login')->middleware('guest');
     
@@ -175,11 +197,10 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::get('/success', function () {return view('pages.success');
         })->name('success');
         
-        
+
 
     //Routes Password Reset
-    Route::get('/forgot-password', function () {return view('auth.email');})
-        ->middleware('guest')->name('password.request');
+    Route::get('/forgot-password', function () {return view('auth.email');})->middleware('guest')->name('password.request');
 
     Route::post('/forgot-password', [ResetPasswordController::class, 'send'])
         ->middleware('guest')->name('password.email');
@@ -197,8 +218,8 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::get('/pages/dashboard/admin', [AdminController::class, 'index'])
         ->name('admin')->middleware(['auth', 'is.admin']);
 
-    Route::view('dashboard', 'pages.dashboard.home')->middleware('auth')
-        ->name('dashboard');
+    Route::get('/pages/dashboard/home', [DashboardController::class, 'index'])
+        ->name('dashboard')->middleware('auth');
 
     Route::get('/dashboard/perfil', [ProfileController::class, 'edit'])
         ->name('profile.edit')->middleware('auth');
@@ -230,5 +251,3 @@ Route::middleware(LocaleCookie::class)->group(function () {
     Route::post('courses/enroll', [CoursesController::class, 'enroll'])
         ->name('courses.enroll');
 });
-
-

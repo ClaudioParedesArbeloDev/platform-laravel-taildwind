@@ -57,7 +57,7 @@ class User extends Authenticatable
     }
 
 
-    // Mutators and Accessors
+    
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -119,5 +119,9 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
 
 }

@@ -9,7 +9,7 @@
     <a class="absolute top-8 right-8" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
         <table class="my-8 w-70 font-five lg:w-6/7">
             <thead>
-                <tr class="text-left text-xs lg:text-xl">
+                <tr class="text-left text-xs lg:text-xl ">
                     <th>{{__('Name')}}</th>
                     <th>{{__('Lastname')}}</th>
                     <th class="hidden lg:table-cell">{{__('Address')}}</th>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                <tr class="text-left text-xs lg:text-sm odd:bg-accent-100 even:bg-accent-300">
+                <tr class="text-left text-xs text-text-900 lg:text-sm odd:bg-accent-100 even:bg-accent-300">
                     <td class="py-4">{{ $user->name }}</td>
                     <td class="py-4">{{ $user->lastname }}</td>
                     <td class="hidden lg:table-cell py-4">{{ $user->address }}</td>

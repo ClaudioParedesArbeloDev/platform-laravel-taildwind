@@ -19,6 +19,7 @@
                             <th class="py-3 px-4 text-left">{{ __('Video') }}</th>
                             <th class="py-3 px-4 text-left">{{ __('Meet') }}</th>
                             <th class="py-3 px-4 text-left">{{ __('Actions') }}</th>
+                            <th class="py-3 px-4 text-left">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,6 +82,17 @@
                                             class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
                                             {{ __('Update') }}
                                         </button>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <form action="{{ route('classes.destroy', $class->id) }}" method="POST" 
+                                            style="display:inline;" 
+                                            onsubmit="return confirm('¿Realmente querés eliminar esta clase? No se puede recuperar.');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium bg-transparent border-0 cursor-pointer">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </form>
                                     </td>
                                 </form>
                             </tr>
