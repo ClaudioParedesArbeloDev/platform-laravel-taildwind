@@ -5,13 +5,13 @@
 @section('content')
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-900 w-11/12 mx-auto font-three max-h-screen">
-    
+    <!-- Header and Back Button -->
     <div class="col-span-1 md:col-span-2 flex justify-between items-center py-4">
         <h2 class="text-2xl uppercase">{{ __('course') }}:</h2>
         <a class="text-xl" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
     </div>
 
-    
+    <!-- Left Column: Core Course Details -->
     <div class="col-span-1 space-y-3">
         <h3 class="text-lg font-semibold">{{__('Title')}}: {{ $course->name }}</h3>
         <p>{{__('Teacher')}}: {{ $course->user->name }}</p>
@@ -29,7 +29,7 @@
         @endif
     </div>
 
-    
+    <!-- Right Column: Image and Additional Details -->
     <div class="col-span-1 space-y-3">
         @if ($course->image != null)
             <img class="h-80 object-cover rounded" src="{{ asset('storage/courses/'.$course->image) }}" alt="courseImage">
@@ -46,7 +46,7 @@
         @endif
     </div>
 
-   
+    <!-- Edit and Delete Buttons -->
     <div class="col-span-1 md:col-span-2 flex gap-4 mt-4">
         <a href="/courses/{{$course->id}}/edit" class="btnEdit px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">{{__('Edit Course')}}</a>
         <form action="/courses/{{$course->id}}" method="POST" id="deleteUserForm">

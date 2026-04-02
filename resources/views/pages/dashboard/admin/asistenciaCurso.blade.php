@@ -76,12 +76,12 @@
                 </table>
             </div>
 
-            
+            <!-- Paginación de alumnos -->
             <div class="mt-4 flex justify-center">
                 {{ $students->links() }}
             </div>
 
-            
+            <!-- Botones de acción -->
             <div class="mt-8 flex flex-col sm:flex-row justify-end gap-4">
                 <a href="{{ route('attendance.index') }}"
                    class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition text-center">

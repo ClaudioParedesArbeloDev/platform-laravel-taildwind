@@ -25,6 +25,9 @@ Route::post('/checkout/webhook', [CheckoutController::class, 'webhook'])
     ->name('checkout.webhook')
     ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
 
+Route::get('/locale/{locale}', function ($locale) {
+    return redirect()->back()->withCookie('locale', $locale);
+});
 
 Route::middleware(LocaleCookie::class)->group(function () {
 

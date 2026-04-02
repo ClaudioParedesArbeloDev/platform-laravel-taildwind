@@ -11,7 +11,7 @@
         </a>
     </div>
 
-    
+    <!-- Mobile Card Layout (visible on mobile, hidden on lg and above) -->
     <div class="block lg:hidden space-y-4">
         @foreach ($courses as $course)
         <div class="bg-accent-100 shadow-md rounded-lg p-4 border border-text-900">
@@ -40,7 +40,7 @@
         @endforeach
     </div>
 
-    
+    <!-- Desktop Table Layout (hidden on mobile, visible on lg and above) -->
     <div class="hidden lg:block overflow-x-auto shadow-md rounded-lg">
         <table class="min-w-full bg-white border border-gray-200">
             <thead class="bg-gray-100">

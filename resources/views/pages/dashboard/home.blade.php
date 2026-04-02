@@ -33,14 +33,14 @@
                         default     => 'text-red-700',
                     };
 
-                    // Colores para la barra (inicio y fin del gradiente)
+                    
                     [$gradientStart, $gradientEnd] = match (true) {
                         $perc >= 80 => ['#10b981', '#059669'],
                         $perc >= 60 => ['#f59e0b', '#d97706'],
                         default     => ['#ef4444', '#dc2626'],
                     };
 
-                    // Mensaje motivacional
+                   
                     $motivMessage = match (true) {
                         $perc >= 80 => '¡Excelente! 🎉 Seguí así',
                         $perc >= 60 => 'Muy bien, ¡un poco más! 💪',
@@ -48,12 +48,12 @@
                     };
                 @endphp
 
-                <div class="bg-accent2-500 border border-accent-500 rounded-xl shadow-lg p-6 w-full sm:w-80 lg:w-96 hover:shadow-xl transition-all duration-300">
-                    
-                    <p class="text-lg text-gray-600 font-medium">
+                <div class="bg-accent2-500 border border-accent-500 m-4 rounded-xl shadow-lg p-6 w-full lg:w-80 hover:shadow-xl transition-all duration-300">
+                   
+                    <p class="text-sm text-gray-600 font-medium">
                         {{ $course->category ?? '—' }}
                     </p>
-                    <h2 class="text-2xl font-bold text-text-900 mt-1 mb-4">
+                    <h2 class="text-md font-bold text-text-900 mt-1 mb-4">
                         {{ $course->name }}
                     </h2>
 
@@ -64,7 +64,7 @@
                                 {{ __('Asistencia') }}:
                             </span>
 
-                            <span class="text-2xl font-extrabold {{ $textColor }}">
+                            <span class="text-xl font-extrabold {{ $textColor }}">
                                 {{ number_format($perc, 1) }}%
                             </span>
                         </div>
@@ -76,13 +76,12 @@
                             </div>
                         </div>
 
-                        
                         <p class="text-sm text-center mt-2 font-medium {{ $msgColor }}">
                             {{ $motivMessage }}
                         </p>
                     </div>
 
-                   
+                    
                     <a href="{{ route('cursos.class', $course->id) }}"
                        class="block w-full bg-accent-300 text-white text-center py-3 rounded-xl hover:bg-accent-400 transition font-medium shadow-md">
                         {{ __('Access the course') }}

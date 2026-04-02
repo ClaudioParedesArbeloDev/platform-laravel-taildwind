@@ -34,7 +34,7 @@
         @endforeach
     </div>
 
-    
+    <!-- Desktop Table Layout (hidden on mobile, visible on lg and above) -->
     <div class="hidden lg:block overflow-x-auto shadow-md rounded-lg">
         <table class="min-w-full bg-white border border-gray-200">
             <thead class="bg-gray-100">

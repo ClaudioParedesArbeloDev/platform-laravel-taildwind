@@ -127,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="flex-1 flex flex-col overflow-y-auto">
+            <div class="flex-1 flex flex-col overflow-hidden">
                 @yield('content')
             </div>
         </div>
