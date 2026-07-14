@@ -1,89 +1,94 @@
 @extends('components.layout.dashLayout')
 
-@section('title', 'Code & Lens - Courses')
+@section('title', 'Code & Lens - Cursos')
 
 @section('content')
-<div class="coursesContainer mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-text-900">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="coursesListTitle text-2xl font-bold  sm:text-3xl">{{ __('Courses') }}</h2>
-        <a class="btnBack flex items-center text-text-900 hover:text-accent-500 transition-colors" href="{{ route('admin') }}">
-            <i class="fa-solid fa-arrow-rotate-left mr-2"></i> {{ __('Back') }}
-        </a>
-    </div>
+<div class="w-full min-h-screen overflow-y-auto bg-background-300">
+    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-8">
 
-    <!-- Mobile Card Layout (visible on mobile, hidden on lg and above) -->
-    <div class="block lg:hidden space-y-4">
-        @foreach ($courses as $course)
-        <div class="bg-accent-100 shadow-md rounded-lg p-4 border border-text-900">
-            <h3 class="text-lg font-semibold">{{ $course->name }}</h3>
-            <div class="mt-2 text-sm text-gray-700">
-                <p><strong>{{ __('Category') }}:</strong> {{ $course->category }}</p>
-                <p><strong>{{ __('Active') }}:</strong>
-                    <span class="{{ $course->active ? 'text-green-600' : 'text-red-600' }}">
-                        {{ $course->active ? __('Active') : __('Inactive') }}
-                    </span>
+       
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <p class="font-five uppercase tracking-[6px] text-xs text-variant-100 mb-2">
+                    {{ __('Dashboard') }}
                 </p>
-                <p><strong>{{ __('Instructor') }}:</strong> {{ $course->user ? $course->user->name : 'Desconocido' }}</p>
+                <h1 class="font-three font-bold text-2xl lg:text-3xl text-text-500">
+                    {{ __('Courses') }}
+                </h1>
             </div>
-            <div class="mt-4 flex flex-col space-y-2">
-                <a href="/courses/{{ $course->id }}" class="btnEditCourses inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm text-center">
-                    {{ __('Edit') }}
-                </a>
-                <a href="{{ route('cursos.students', $course->id) }}" class="btnStudents inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm text-center">
-                    {{ __('Students') }}
-                </a>
-                <a href="{{ route('cursos.classes', $course->id) }}" class="btnClasses inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm text-center">
-                    {{ __('Classes') }}
-                </a>
-            </div>
+            <a href="{{ route('courses.create') }}"
+               class="py-2.5 px-5 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-accent-900 text-white hover:opacity-90 focus:outline-hidden transition-opacity duration-300">
+                <i class="fa-solid fa-plus"></i>
+                <span>{{ __('create') }}</span>
+            </a>
         </div>
-        @endforeach
-    </div>
 
-    <!-- Desktop Table Layout (hidden on mobile, visible on lg and above) -->
-    <div class="hidden lg:block overflow-x-auto shadow-md rounded-lg">
-        <table class="min-w-full bg-white border border-gray-200">
-            <thead class="bg-gray-100">
-                <tr class="coursesTableHeader text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                    <th class="py-3 px-6">{{ __('Title') }}</th>
-                    <th class="py-3 px-6">{{ __('Category') }}</th>
-                    <th class="py-3 px-6">{{ __('Active') }}</th>
-                    <th class="py-3 px-6">{{ __('Instructor') }}</th>
-                    <th class="py-3 px-6">{{ __('Edit') }}</th>
-                    <th class="py-3 px-6">{{ __('Students') }}</th>
-                    <th class="py-3 px-6">{{ __('Classes') }}</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-                @foreach ($courses as $course)
-                <tr class="coursesTableBody hover:bg-gray-50 transition-colors">
-                    <td class="py-4 px-6 text-gray-900">{{ $course->name }}</td>
-                    <td class="py-4 px-6 text-gray-700">{{ $course->category }}</td>
-                    <td class="py-4 px-6">
-                        <span class="{{ $course->active ? 'text-green-600' : 'text-red-600' }}">
-                            {{ $course->active ? __('Active') : __('Inactive') }}
-                        </span>
-                    </td>
-                    <td class="py-4 px-6 text-gray-700">{{ $course->user ? $course->user->name : 'Desconocido' }}</td>
-                    <td class="py-4 px-6">
-                        <a href="/courses/{{ $course->id }}" class="btnEditCourses inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">
-                            {{ __('Edit') }}
-                        </a>
-                    </td>
-                    <td class="py-4 px-6">
-                        <a href="{{ route('cursos.students', $course->id) }}" class="btnStudents inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm">
-                            {{ __('Students') }}
-                        </a>
-                    </td>
-                    <td class="py-4 px-6">
-                        <a href="{{ route('cursos.classes', $course->id) }}" class="btnClasses inline-block px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm">
-                            {{ __('Classes') }}
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @if (session('success'))
+            <div class="bg-green-100 text-green-700 text-sm rounded-lg p-4 mb-6">{{ session('success') }}</div>
+        @endif
+
+        @if ($courses->isEmpty())
+            <div class="flex flex-col items-center text-center bg-background-500 border border-variant-100 shadow-2xs rounded-xl p-10">
+                <i class="fa-solid fa-graduation-cap text-3xl text-variant-100 mb-4"></i>
+                <p class="text-text-500">{{ __('No courses found.') }}</p>
+            </div>
+        @else
+            <div class="bg-background-500 border border-variant-100 shadow-2xs rounded-xl overflow-hidden overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-variant-100 text-left">
+                            <th class="p-4 text-xs uppercase tracking-wide text-variant-100 font-medium">{{ __('Title') }}</th>
+                            <th class="p-4 text-xs uppercase tracking-wide text-variant-100 font-medium hidden lg:table-cell">{{ __('Category') }}</th>
+                            <th class="p-4 text-xs uppercase tracking-wide text-variant-100 font-medium hidden lg:table-cell">{{ __('Instructor') }}</th>
+                            <th class="p-4 text-xs uppercase tracking-wide text-variant-100 font-medium">{{ __('Status') }}</th>
+                            <th class="p-4 text-xs uppercase tracking-wide text-variant-100 font-medium text-right">{{ __('Actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($courses as $course)
+                            <tr class="border-b border-variant-100 last:border-b-0">
+                                <td class="p-4">
+                                    <p class="font-bold text-text-900">{{ $course->name }}</p>
+                                    <p class="text-xs text-text-500 lg:hidden">{{ $course->category }}</p>
+                                </td>
+                                <td class="p-4 text-text-500 hidden lg:table-cell">{{ $course->category ?? '—' }}</td>
+                                <td class="p-4 text-text-500 hidden lg:table-cell">{{ $course->user->name ?? '—' }}</td>
+                                <td class="p-4">
+                                    <span class="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full {{ $course->active ? 'bg-green-100 text-green-700' : 'bg-background-300 text-text-500' }}">
+                                        {{ $course->active ? __('Active') : __('Inactive') }}
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <div class="flex justify-end gap-x-2">
+                                        <a href="{{ route('courses.show', $course->id) }}"
+                                           class="w-9 h-9 flex items-center justify-center rounded-lg border border-variant-100 text-text-500 hover:bg-accent-900 hover:text-white hover:border-accent-900 transition-colors duration-300">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('courses.edit', $course->id) }}"
+                                           class="w-9 h-9 flex items-center justify-center rounded-lg border border-variant-100 text-text-500 hover:bg-accent-900 hover:text-white hover:border-accent-900 transition-colors duration-300">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <a href="{{ route('cursos.students', $course->id) }}"
+                                           class="w-9 h-9 flex items-center justify-center rounded-lg border border-variant-100 text-text-500 hover:bg-accent-900 hover:text-white hover:border-accent-900 transition-colors duration-300">
+                                            <i class="fa-solid fa-users"></i>
+                                        </a>
+                                        <a href="{{ route('cursos.classes', $course->id) }}"
+                                           class="w-9 h-9 flex items-center justify-center rounded-lg border border-variant-100 text-text-500 hover:bg-accent-900 hover:text-white hover:border-accent-900 transition-colors duration-300">
+                                            <i class="fa-solid fa-chalkboard"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6">
+                {{ $courses->links() }}
+            </div>
+        @endif
+
     </div>
 </div>
 @endsection

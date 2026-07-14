@@ -54,7 +54,7 @@
                 @if($course->price == 0)
                     <span class="text-green-600">GRATIS</span>
                 @else
-                    <span class="text-accent-600">u$s {{ number_format($course->price, 2) }}</span>
+                    <span class="text-accent-600">${{ number_format($course->price, 2, ',', '.') }}</span>
                 @endif
             </p>
 

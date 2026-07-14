@@ -18,6 +18,22 @@ class Blog extends Model
             return 'slug';
         }
 
+        public function getCategoryLabelAttribute()
+        {
+            return static::categoryLabel($this->category);
+        }
+
+        public static function categoryLabel(?string $category): string
+        {
+            $labels = [
+                'programacion' => 'Programming',
+                'fotografia' => 'Photography',
+                'filmmaking' => 'Filmmaking',
+            ];
+
+            return $labels[$category] ?? ucfirst((string) $category);
+        }
+
         public function comments()
         {
             return $this->hasMany(Comment::class);

@@ -50,7 +50,7 @@ class Auth0ManualController extends Controller
             ->get("https://" . env('AUTH0_DOMAIN') . "/userinfo")
             ->json();
 
-        // Crear o actualizar usuario local
+        
         $user = User::updateOrCreate(
             ['email' => $userInfo['email']],
             [
@@ -62,6 +62,6 @@ class Auth0ManualController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard'); // o a donde quieras redirigir
+        return redirect()->route('dashboard');
     }
 }

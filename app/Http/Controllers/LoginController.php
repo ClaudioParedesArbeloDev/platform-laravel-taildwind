@@ -29,11 +29,6 @@ class LoginController extends Controller
     }
     
 
-    public function register()
-    {
-        return view ('users.create');
-    }
-
     public function logout()
     {
         Auth::logout();

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('avatar');
             $table->timestamps();
     
-            // Clave foránea para la relación con la tabla 'users'
+            
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')

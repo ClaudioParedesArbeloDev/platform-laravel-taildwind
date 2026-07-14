@@ -19,11 +19,11 @@ class ContactController extends Controller
 
 
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required',
-            'message' => 'required',
-           
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:150',
+            'message' => 'required|string|max:3000',
+
 
         ]);
 

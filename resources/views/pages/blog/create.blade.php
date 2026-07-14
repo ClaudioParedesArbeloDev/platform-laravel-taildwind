@@ -3,42 +3,64 @@
 @section('title', 'Code & Lens - Create Blog')
 
 @section('content')
-
-    <div class="flex flex-col justify-center items-center text-text-900">
-        <h2 class="font-two p-4 lg:text-2xl lg:p-8">{{__('Create Blog')}}</h2>
-        <a class="absolute right-10 top-5 lg:top-10" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-        <form action="{{route('blogs.index')}}" method="POST" class="flex flex-col justify-center items-center gap-2 lg:gap-4">
-        @csrf
-            <label class="font-one" for="title">{{__('Title')}}:</label>
-            
-            <input class="bg-background-500 font-one p-2 rounded-md w-xs lg:w-3xl" type="text" id="title" name="title" >
-        
-            <label class="font-one" for="author">{{__('Author')}}:</label>
-        
-            <input class="bg-background-500 font-one p-2 rounded-md w-xs lg:w-3xl" type="text" id="author" name="author" >
-        
-            <label class="font-one" for="anticipated">{{__('Advance')}}:</label>
-        
-            <input class="bg-background-500 font-one p-2 rounded-md w-xs lg:w-3xl" type="text" id="anticipated" name="anticipated" >
-    
-            <label class="font-one" for="image">{{__('Image')}}:</label>
-        
-            <input class="bg-background-500 font-one p-2 rounded-md w-xs lg:w-3xl" type="text" id="image" name="image" >
-        
-            <label class="font-one" for="body">{{__('Body')}}:</label>
-        
-            <textarea class="bg-background-500 w-xs h-20 lg:h-40 lg:w-3xl rounded-md" rows="10" type="text-area" id="body" name="body" ></textarea>
-    
-            <label class="font-one" for="category">{{__('Category')}}:</label>
-        
-            <select name="category" class="font-one" id="category" class="btnFormSelect">
-                <option value="programacion">{{__('Programming')}}</option>
-                <option value="fotografia">{{__('Photography')}}</option>
-                <option value="filmmaking">{{__('Filmmaking')}}</option>
-            </select>
-            
-            <button class="bg-accent2-500 px-4 py-2 hover:bg-accent-500 rounded-md " type="submit">{{__('Create')}}</button>
-        </form>
+<div class="formWrapper mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-6 text-text-900">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="titleCreate text-2xl font-bold sm:text-3xl">{{ __('Create Blog') }}</h2>
+        <a class="btnBack flex items-center text-blue-600 hover:text-blue-800 transition-colors" href="{{ route('admin') }}">
+            <i class="fa-solid fa-arrow-rotate-left mr-2"></i> {{ __('Back') }}
+        </a>
     </div>
 
+    @if ($errors->any())
+        <div class="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('blogs.store') }}" method="POST" class="formCreate space-y-6">
+        @csrf
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="title">{{ __('Title') }}:</label>
+            <input class="formInput mt-1 block w-full lg:w-200 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="title" name="title" value="{{ old('title') }}" required>
+        </div>
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="author">{{ __('Author') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="author" name="author" value="{{ old('author') }}" required>
+        </div>
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="category">{{ __('Category') }}:</label>
+            <select name="category" id="category" class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                <option value="programacion" {{ old('category') == 'programacion' ? 'selected' : '' }}>{{ __('Programming') }}</option>
+                <option value="fotografia" {{ old('category') == 'fotografia' ? 'selected' : '' }}>{{ __('Photography') }}</option>
+                <option value="filmmaking" {{ old('category') == 'filmmaking' ? 'selected' : '' }}>{{ __('Filmmaking') }}</option>
+            </select>
+        </div>
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="anticipated">{{ __('Advance') }}:</label>
+            <textarea class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="anticipated" name="anticipated" rows="3" required>{{ old('anticipated') }}</textarea>
+        </div>
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="image">{{ __('Image') }}:</label>
+            <input class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="url" id="image" name="image" value="{{ old('image') }}" placeholder="https://" required>
+        </div>
+
+        <div class="lg:flex lg:items-center">
+            <label class="formLabel block text-sm font-medium lg:pr-2" for="body">{{ __('Body') }}:</label>
+            <textarea class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="body" name="body" rows="10" required>{{ old('body') }}</textarea>
+        </div>
+
+        <div class="flex justify-end">
+            <button class="formButton px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors" type="submit">{{ __('Create') }}</button>
+        </div>
+    </form>
+</div>
 @endsection

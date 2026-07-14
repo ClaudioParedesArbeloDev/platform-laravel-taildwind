@@ -14,15 +14,15 @@
                 <h2 class="font-bold text-2xl">Curso: {{$course->name}}</h2>
                 <h3 class="">{{__('Category')}}: {{$course->category}}</h3>
                 <p>Duración: {{$course->duration}}</p>
-                <p class="font-bold text-xl">Precio: ${{$course->price}}</p>
+                <p class="font-bold text-xl">Precio: ${{ number_format($course->price, 2, ',', '.') }}</p>
     
                 <img src="{{ asset('storage/courses/'.$course->image) }}" alt="{{$course->name}}" style="max-width: 400px; margin: 20px auto;">
 
-                <!-- Loading mientras se crea la preferencia -->
+               
                 <div id="loading" style="padding: 20px;">
                   <p>Preparando el pago...</p>
                 </div>
-                <!-- Container para el botón de pago de Mercado Pago -->
+               
                 <div id="walletBrick_container" class="w-[250px]"></div>
             </div>
         </div>
@@ -40,7 +40,7 @@
         enroll_day: {{ $selectedDay ?? 'null' }}
     };
 
-    // Crear la preferencia en el backend
+    
     fetch('/checkout/process', {
         method: 'POST',
         headers: {
@@ -62,10 +62,10 @@
             throw new Error('No se recibió el preference_id');
         }
 
-        // Ocultar loading
+        
         document.getElementById('loading').style.display = 'none';
 
-        // Renderizar el Wallet Brick con la preferencia creada
+        
         const bricksBuilder = mp.bricks();
         
         bricksBuilder.create("wallet", "walletBrick_container", {

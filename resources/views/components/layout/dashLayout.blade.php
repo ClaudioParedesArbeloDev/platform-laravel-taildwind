@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RPQYL861V"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -70,18 +70,12 @@
                                 <span class="sidebar-text">{{__('more courses')}}</span>
                             </a>
                         </li>
-                      {{--   <li>
-                            <a href="#" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">
-                                <span class="material-symbols-outlined">notifications</span>
-                                <span class="sidebar-text">{{__('notifications')}}</span>
+                        <li>
+                            <a href="{{route('software.my')}}" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">
+                                <span class="material-symbols-outlined">apps</span>
+                                <span class="sidebar-text">{{__('my apps')}}</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">
-                                <span class="material-symbols-outlined">forum</span>
-                                <span class="sidebar-text">{{__('chat')}}</span>
-                            </a>
-                        </li> --}}
                         @if(Auth::user()->roles->contains('name', 'admin'))
                             <li>
                                 <a href="{{route('admin')}}" class="flex items-center space-x-2 hover:text-accent2-700 pt-4">

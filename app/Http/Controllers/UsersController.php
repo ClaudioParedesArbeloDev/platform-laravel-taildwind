@@ -108,7 +108,7 @@ class UsersController extends Controller
         if($role){
             $user->roles()->attach($role);
         }
-        session()->flash('success', 'User registered successfully!');
+        session()->flash('success', __('User registered successfully!'));
         return redirect()->intended($request->input('redirect', route('success')));
     }
 
@@ -116,7 +116,7 @@ class UsersController extends Controller
     
     public function show($id)
     {
-        $user = User::with('roles')->find($id);
+        $user = User::with(['roles', 'courses'])->findOrFail($id);
 
         return view('pages.dashboard.admin.user', compact('user'));
     }
@@ -135,29 +135,55 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->name=$request->name;
-        $user->lastname=$request->lastname;
-        $user->address=$request->address;
-        $user->phone=$request->phone;
-        $user->email=$request->email;
-        $user->dni=$request->dni;
-        $user->date_birth=$request->date_birth;
-        $user->username=$request->username;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'dni' => 'nullable|string|unique:users,dni,' . $user->id,
+            'date_birth' => 'nullable|date',
+            'username' => 'nullable|string|unique:users,username,' . $user->id,
+            'role' => 'required|exists:roles,id',
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser válido.',
+            'email.unique' => 'El correo electrónico ya está registrado por otro usuario.',
+            'dni.unique' => 'El DNI ya está registrado por otro usuario.',
+            'date_birth.date' => 'La fecha de nacimiento debe ser válida.',
+            'username.unique' => 'El nombre de usuario ya está en uso.',
+            'role.required' => 'Seleccioná un rol.',
+            'role.exists' => 'El rol seleccionado no es válido.',
+        ]);
+
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->dni = $request->dni;
+        $user->date_birth = $request->date_birth;
+        $user->username = $request->username;
 
         $user->save();
-        
+
         $user->roles()->sync([$request->role]);
-        
-        return redirect("/users/$id");
+
+        return redirect()->route('users.show', $user->id)->with('success', 'Usuario actualizado correctamente');
     }
 
-    
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+
+        if ($user->id === auth()->id()) {
+            return redirect()->route('users.show', $user->id)
+                ->with('error', 'No podés eliminar tu propia cuenta.');
+        }
 
         $user->delete();
 
-        return redirect('/users');
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +10,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 use App\Models\Role;
 use App\Models\Avatar;
 use App\Models\Courses;
+use App\Models\Software;
 
 class User extends Authenticatable
 {
@@ -101,6 +101,12 @@ class User extends Authenticatable
     public function courses(){
         return $this->belongsToMany(Course::class, 'course_user')
             ->withPivot('enroll_day', 'status')->withTimestamps();
+    }
+
+    public function software(){
+        return $this->belongsToMany(Software::class, 'user_software')
+            ->withPivot('software_order_id', 'status', 'license_type', 'purchased_at', 'expires_at', 'download_token')
+            ->withTimestamps();
     }
 
     public function hasRole($role)

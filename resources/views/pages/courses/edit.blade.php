@@ -1,75 +1,45 @@
 @extends('components.layout.dashLayout')
 
-@section('title', 'Code & Lens - Course Edit')
-    
+@section('title', 'Code & Lens - Editar Curso')
+
 @section('content')
+<div class="w-full min-h-screen overflow-y-auto bg-background-300">
+    <div class="max-w-3xl mx-auto px-4 lg:px-8 py-8">
 
-
-    <div class="flex flex-col text-text-900 justify-center h-full items-center font-three">
-        <h2 class="font-bold text-xl ">{{__('Edit Course')}}</h2>
-        <form action="/courses/{{$course->id}}" method="POST" class="flex flex-col w-4/6">
-    
-            @csrf
-    
-            @method('PUT')
-    
-            <label class="py-2" for="name">{{__('Name')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="name" name="name" value="{{$course->name}}">
-
-            <label class="py-2" for="description">{{__('Description')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text"  id="description" name="description" value="{{$course->description}}">
-    
-            <label class="py-2" for="image">{{__('Image')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="image" name="image" value="{{$course->image}}">
-    
-            <label class="py-2" for="price">{{__('Price')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="price" name="price" value="{{$course->price}}">
-    
-            <label class="py-2" for="days1">{{__('Days')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="days1" name="days1" value="{{$course->days1}}">
-    
-            <label class="py-2" for="days2">{{__('Days')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="days2" name="days2" value="{{$course->days2}}">
-        
-            <label class="py-2" for="duration">{{__('Duration')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text" id="duration" name="duration" value="{{$course->duration}}">
-    
-            <label class="py-2" for="category">{{__('Category')}}:</label>
-    
-            <input class="p-2 bg-accent-300" type="text"  id="category" name="category" value="{{$course->category}}">
-    
-            <label class="py-2" for="active">{{__('Active')}}:</label>
-            
-            <select class="p-2 bg-accent-300" name="active" id="active" class="formInput">
-                <option value="1" {{ $course->active ? 'selected' : '' }}>{{__('Active')}}</option>
-                <option value="0" {{ $course->active ? '' : 'selected' }}>{{__('Inactive')}}</option>
-            </select>
-    
-    
-            <label class="py-2" for="instructor">{{ __('Instructor') }}:</label>
-
-            <select class="p-2 bg-accent-300" class="formInput" id="user_id" name="user_id" required>
-            <option value="">{{ __('Select an instructor') }}</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ $user->id == $course->user_id ? 'selected' : '' }}>
-                        {{ $user->name }}
-                    </option>
-                @endforeach
-            </select>
-            <div class="flex justify-center p-4">
-                <button class="bg-accent1-300 p-2 rounded-xl mx-4 cursor-pointer" type="submit">{{__('Update')}}</button>
-    
-                <a class="bg-accent2-500 p-2 rounded-xl mx-4 cursor-pointer" href="/courses/{{$course->id}}" class="btnCancel">{{__('Cancel')}}</a>
+     
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <p class="font-five uppercase tracking-[6px] text-xs text-variant-100 mb-2">
+                    {{ __('Dashboard') }}
+                </p>
+                <h1 class="font-three font-bold text-2xl lg:text-3xl text-text-500">
+                    {{ $course->name }}
+                </h1>
             </div>
-    
-        </form>
+            <a href="{{ route('courses.show', $course->id) }}" class="text-sm text-variant-100 hover:underline flex items-center gap-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                {{ __('Back') }}
+            </a>
         </div>
 
+        <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data" class="font-three text-text-900">
+            @csrf
+            @method('PUT')
+            @include('pages.courses.partials.form')
+
+            <div class="flex gap-x-3">
+                <button type="submit"
+                    class="py-2.5 px-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-accent-900 text-white hover:opacity-90 focus:outline-hidden transition-opacity duration-300">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>{{ __('Update') }}</span>
+                </button>
+                <a href="{{ route('courses.show', $course->id) }}"
+                   class="py-2.5 px-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-variant-100 text-text-500 hover:bg-background-500 transition-colors duration-300">
+                    {{ __('Cancel') }}
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
 @endsection

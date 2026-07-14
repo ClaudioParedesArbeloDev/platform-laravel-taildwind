@@ -1,73 +1,131 @@
 @extends('components.layout.dashLayout')
 
-@section('title', 'Code & Lens - Create Class')
+@section('title', 'Code & Lens - Crear Clase')
 
 @section('content')
-<div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-6 text-text-900">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold sm:text-3xl">{{ __('Create Class') }}</h2>
-        <a class="flex items-center text-blue-600 hover:text-blue-800 px-12 transition-colors" href="{{ route('admin') }}">
-            <i class="fa-solid fa-arrow-rotate-left mr-2"></i> {{ __('Back') }}
-        </a>
+<div class="w-full min-h-screen overflow-y-auto bg-background-300">
+    <div class="max-w-2xl mx-auto px-4 lg:px-8 py-8">
+
+        
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <p class="font-five uppercase tracking-[6px] text-xs text-variant-100 mb-2">
+                    {{ __('Dashboard') }}
+                </p>
+                <h1 class="font-three font-bold text-2xl lg:text-3xl text-text-500">
+                    {{ __('Create Class') }}
+                </h1>
+            </div>
+            <a href="{{ request('course_id') ? route('cursos.classes', request('course_id')) : route('admin') }}" class="text-sm text-variant-100 hover:underline flex items-center gap-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                {{ __('Back') }}
+            </a>
+        </div>
+
+        <form action="{{ route('classes.store') }}" method="POST" class="font-three text-text-900">
+            @csrf
+
+            <div class="bg-background-500 border border-variant-100 shadow-2xs rounded-xl p-6 lg:p-8 mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+
+                    <div class="sm:col-span-2">
+                        <label for="course_id" class="text-sm font-medium block mb-1">{{ __('Course') }} *</label>
+                        <select id="course_id" name="course_id"
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('course_id') border-red-500 @enderror">
+                            <option value="">{{ __('Select a course') }}</option>
+                            @php $preselected = old('course_id', request('course_id')); @endphp
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}" {{ (string) $preselected === (string) $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('course_id')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="title" class="text-sm font-medium block mb-1">{{ __('Title') }} *</label>
+                        <input type="text" id="title" name="title" value="{{ old('title') }}"
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('title') border-red-500 @enderror">
+                        @error('title')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="date" class="text-sm font-medium block mb-1">{{ __('Date') }}</label>
+                        <input type="date" id="date" name="date" value="{{ old('date') }}"
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('date') border-red-500 @enderror">
+                        @error('date')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="start_time" class="text-sm font-medium block mb-1">{{ __('Start Time') }}</label>
+                        <input type="time" id="start_time" name="start_time" value="{{ old('start_time') }}"
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('start_time') border-red-500 @enderror">
+                        @error('start_time')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="pdf" class="text-sm font-medium block mb-1">{{ __('PDF') }}</label>
+                        <input type="url" id="pdf" name="pdf" value="{{ old('pdf') }}" placeholder="https://..."
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('pdf') border-red-500 @enderror">
+                        @error('pdf')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="powerpoint" class="text-sm font-medium block mb-1">{{ __('Powerpoint') }}</label>
+                        <input type="url" id="powerpoint" name="powerpoint" value="{{ old('powerpoint') }}" placeholder="https://..."
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('powerpoint') border-red-500 @enderror">
+                        @error('powerpoint')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="video" class="text-sm font-medium block mb-1">{{ __('Video') }}</label>
+                        <input type="url" id="video" name="video" value="{{ old('video') }}" placeholder="https://..."
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('video') border-red-500 @enderror">
+                        @error('video')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="meet_link" class="text-sm font-medium block mb-1">{{ __('Meet Link') }}</label>
+                        <input type="url" id="meet_link" name="meet_link" value="{{ old('meet_link') }}" placeholder="https://..."
+                            class="w-full bg-background-300 text-text-900 p-2.5 rounded-lg border border-variant-100 focus:outline-hidden focus:border-accent-900 transition-colors duration-300 @error('meet_link') border-red-500 @enderror">
+                        @error('meet_link')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-variant-100">
+                    <label class="flex items-center gap-x-2 text-sm cursor-pointer">
+                        <input type="checkbox" name="work" value="1" {{ old('work') ? 'checked' : '' }}
+                            class="w-4 h-4 rounded border-variant-100 text-accent-900 focus:ring-accent-900">
+                        {{ __('Homework') }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="py-2.5 px-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-accent-900 text-white hover:opacity-90 focus:outline-hidden transition-opacity duration-300">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>{{ __('create') }}</span>
+                </button>
+            </div>
+        </form>
+
     </div>
-
-    <form action="{{ route('classes.index') }}" method="POST" class="space-y-6 w-200">
-        @csrf
-        <div>
-            <label class="block text-sm font-medium" for="course_id">{{ __('Course') }}:</label>
-            <select class="formInput mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="course_id" name="course_id" required>
-                <option class="bg-accent-500" value="">{{ __('Select a course') }}</option>
-                @foreach($courses as $course)
-                    <option class="bg-accent-500" value="{{ $course->id }}">{{ $course->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="title">{{ __('Title') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="title" name="title" required>
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="date">{{ __('Date') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="date" id="date" name="date">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="start_time">{{ __('Start Time') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="time" id="start_time" name="start_time">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="pdf">{{ __('PDF') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="pdf" name="pdf">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="powerpoint">{{ __('Powerpoint') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="powerpoint" name="powerpoint">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="video">{{ __('Video') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="video" name="video">
-        </div>
-
-        <div>
-            <label class="flex items-center text-sm font-medium" for="work">
-                <input type="checkbox" id="work" name="work" value="1" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2">
-                {{ __('Homework') }}
-            </label>
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium" for="meet_link">{{ __('Meet Link') }}:</label>
-            <input class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" type="text" id="meet_link" name="meet_link">
-        </div>
-
-        <div class="flex justify-end">
-            <button class="formButton px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors" type="submit">{{ __('Create') }}</button>
-        </div>
-    </form>
 </div>
 @endsection

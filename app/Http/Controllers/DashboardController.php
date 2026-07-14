@@ -13,11 +13,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Cursos del usuario autenticado + clases pasadas
+        
         $courses = $user->courses()
             ->with(['classes' => function ($query) {
                 $query->where('date', '<=', now()->toDateString())
-                      ->select('id', 'course_id'); // solo lo necesario
+                      ->select('id', 'course_id'); 
             }])
             ->get()
             ->map(function ($course) use ($user) {
@@ -25,30 +25,31 @@ class DashboardController extends Controller
 
                 if ($totalClasses === 0) {
                     $course->attendance_percentage = 0;
-                    $course->attendance_color = 'gray';
                     return $course;
                 }
 
-                // Conteo de presentes (más eficiente que cargar todo)
+        
                 $presentCount = Attendance::where('user_id', $user->id)
                     ->whereIn('class_id', $course->classes->pluck('id'))
                     ->where('present', true)
                     ->count();
 
-                $percentage = round(($presentCount / $totalClasses) * 100, 1);
-
-                $course->attendance_percentage = $percentage;
-
-                // Color para la vista
-                $course->attendance_color = match (true) {
-                    $percentage >= 80 => 'green',
-                    $percentage >= 60 => 'yellow',
-                    default           => 'red',
-                };
+                $course->attendance_percentage = round(($presentCount / $totalClasses) * 100, 1);
 
                 return $course;
             });
 
-        return view('pages.dashboard.home', compact('courses'));
+        
+        $activeCoursesCount = $courses->count();
+
+        $softwareOwnedCount = $user->software()
+            ->wherePivotIn('status', ['active', 'pending_delivery'])
+            ->count();
+
+        return view('pages.dashboard.home', compact(
+            'courses',
+            'activeCoursesCount',
+            'softwareOwnedCount'
+        ));
     }
 }

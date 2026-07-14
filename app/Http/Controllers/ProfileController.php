@@ -12,14 +12,14 @@ use Illuminate\Support\Str;
 class ProfileController extends Controller
 {
 
-    //Metodo para mostrar el perfil del usuario
+
     public function edit()
     {
         $user = auth()->user();
         return view('pages.dashboard.profile', compact('user'));
     }
 
-    //Metodo para actualizar el perfil del usuario
+    
     public function update(Request $request)
     {
         $user = auth()->user();
@@ -31,7 +31,7 @@ class ProfileController extends Controller
             'phone' => 'nullable|string|max:20',
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user->update([
@@ -65,7 +65,7 @@ class ProfileController extends Controller
                 $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)
             );
         
-            // Guarda la referencia en la base de datos
+            
             $user->avatar()->updateOrCreate(
                 ['user_id' => $user->id],
                 ['avatar' => $avatarName]

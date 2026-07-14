@@ -1,60 +1,131 @@
 @extends('components.layout.dashLayout')
 
-@section('title', 'Code & Lens - Course')
+@section('title', 'Code & Lens - Curso')
 
 @section('content')
+<div class="w-full min-h-screen overflow-y-auto bg-background-300">
+    <div class="max-w-3xl mx-auto px-4 lg:px-8 py-8">
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-900 w-11/12 mx-auto font-three max-h-screen">
-    <!-- Header and Back Button -->
-    <div class="col-span-1 md:col-span-2 flex justify-between items-center py-4">
-        <h2 class="text-2xl uppercase">{{ __('course') }}:</h2>
-        <a class="text-xl" href="{{route('admin')}}"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-    </div>
-
-    <!-- Left Column: Core Course Details -->
-    <div class="col-span-1 space-y-3">
-        <h3 class="text-lg font-semibold">{{__('Title')}}: {{ $course->name }}</h3>
-        <p>{{__('Teacher')}}: {{ $course->user->name }}</p>
-        <div class="max-h-140 overflow-y-auto ">
-            <p>{{__('Description')}}: {!! $course->description !!}</p>
+        
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <p class="font-five uppercase tracking-[6px] text-xs text-variant-100 mb-2">
+                    {{ __('Dashboard') }}
+                </p>
+                <h1 class="font-three font-bold text-2xl lg:text-3xl text-text-500">
+                    {{ $course->name }}
+                </h1>
+            </div>
+            <a href="{{ route('courses.index') }}" class="text-sm text-variant-100 hover:underline flex items-center gap-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                {{ __('Back') }}
+            </a>
         </div>
-        @if (($course->capacity != null) && ($course->capacity != ''))
-            <p>{{__('Capacity')}}: {{ $course->capacity }}</p>
-        @endif
-        @if (($course->category != null) && ($course->category != ''))
-            <p>{{__('Category')}}: {{ $course->category }}</p>
-        @endif
-        @if (($course->active != null) && ($course->active != ''))
-            <p>{{__('Active')}}: {{ $course->active ? __('Active') : __('Inactive') }}</p>
-        @endif
-    </div>
 
-    <!-- Right Column: Image and Additional Details -->
-    <div class="col-span-1 space-y-3">
-        @if ($course->image != null)
-            <img class="h-80 object-cover rounded" src="{{ asset('storage/courses/'.$course->image) }}" alt="courseImage">
+        @if (session('success'))
+            <div class="bg-green-100 text-green-700 text-sm rounded-lg p-4 mb-6">{{ session('success') }}</div>
         @endif
-        <p>{{ __('Price') }}: {{ $course->price == 0.00 ? 'Free' : '$' . number_format($course->price, 2) }}</p>
-        @if (($course->days1 != null) && ($course->days1 != ''))
-            <p>{{__('Days')}}: {{ $course->days1 }}</p>
-        @endif
-        @if (($course->days2 != null) && ($course->days2 != ''))
-            <p>{{__('Days')}}: {{ $course->days2 }}</p>
-        @endif
-        @if (($course->duration != null) && ($course->duration != ''))
-            <p>{{__('Duration')}}: {{ $course->duration }}</p>
-        @endif
-    </div>
 
-    <!-- Edit and Delete Buttons -->
-    <div class="col-span-1 md:col-span-2 flex gap-4 mt-4">
-        <a href="/courses/{{$course->id}}/edit" class="btnEdit px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">{{__('Edit Course')}}</a>
-        <form action="/courses/{{$course->id}}" method="POST" id="deleteUserForm">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="deleteUser px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">{{__('Delete Course')}}</button>
-        </form>
+        <div class="bg-background-500 border border-variant-100 shadow-2xs rounded-xl overflow-hidden mb-6">
+            @if ($course->image)
+                <img src="{{ asset('storage/courses/' . $course->image) }}" alt="{{ $course->name }}" class="w-full h-56 object-cover">
+            @endif
+
+            <div class="p-6 lg:p-8">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                    @if ($course->category)
+                        <span class="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full bg-background-300 text-text-500">
+                            {{ $course->category }}
+                        </span>
+                    @endif
+                    <span class="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full {{ $course->active ? 'bg-green-100 text-green-700' : 'bg-background-300 text-text-500' }}">
+                        {{ $course->active ? __('Active') : __('Inactive') }}
+                    </span>
+                </div>
+
+                <p class="text-sm text-text-500 mb-1">{{ __('Teacher') }}: {{ $course->user->name ?? '—' }}</p>
+                <p class="text-sm text-text-900 leading-relaxed mb-6">{!! $course->description !!}</p>
+
+                <dl class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-sm">
+                    <div>
+                        <dt class="text-xs uppercase tracking-wide text-variant-100 mb-0.5">{{ __('Price') }}</dt>
+                        <dd class="text-text-900 font-semibold">{{ $course->price == 0.00 ? __('Free') : '$' . number_format($course->price, 2, ',', '.') }}</dd>
+                    </div>
+                    @if ($course->duration)
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-variant-100 mb-0.5">{{ __('Duration') }}</dt>
+                            <dd class="text-text-900">{{ $course->duration }}</dd>
+                        </div>
+                    @endif
+                    @if ($course->capacity)
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-variant-100 mb-0.5">{{ __('Capacity') }}</dt>
+                            <dd class="text-text-900">{{ $course->capacity }}</dd>
+                        </div>
+                    @endif
+                    @if ($course->days1)
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-variant-100 mb-0.5">{{ __('Days') }} 1</dt>
+                            <dd class="text-text-900">{{ $course->days1 }}</dd>
+                        </div>
+                    @endif
+                    @if ($course->days2)
+                        <div>
+                            <dt class="text-xs uppercase tracking-wide text-variant-100 mb-0.5">{{ __('Days') }} 2</dt>
+                            <dd class="text-text-900">{{ $course->days2 }}</dd>
+                        </div>
+                    @endif
+                </dl>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <a href="{{ route('cursos.students', $course->id) }}"
+               class="flex items-center gap-x-3 bg-background-500 border border-variant-100 shadow-2xs rounded-xl p-5 hover:-translate-y-1 transition-transform duration-300">
+                <i class="fa-solid fa-users text-lg text-variant-100"></i>
+                <span class="text-sm font-medium text-text-900">{{ __('Manage students') }}</span>
+            </a>
+            <a href="{{ route('cursos.classes', $course->id) }}"
+               class="flex items-center gap-x-3 bg-background-500 border border-variant-100 shadow-2xs rounded-xl p-5 hover:-translate-y-1 transition-transform duration-300">
+                <i class="fa-solid fa-chalkboard text-lg text-variant-100"></i>
+                <span class="text-sm font-medium text-text-900">{{ __('Manage classes') }}</span>
+            </a>
+        </div>
+
+        <div class="flex gap-x-3">
+            <a href="{{ route('courses.edit', $course->id) }}"
+               class="flex-1 py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-accent-900 text-white hover:opacity-90 focus:outline-hidden transition-opacity duration-300">
+                <i class="fa-solid fa-pen"></i>
+                <span>{{ __('Edit Course') }}</span>
+            </a>
+
+            <form action="{{ route('courses.destroy', $course->id) }}" method="POST" id="deleteCourseForm">
+                @csrf
+                @method('DELETE')
+                <button type="button" id="deleteCourseBtn"
+                    class="py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-red-500 text-red-600 hover:bg-red-600 hover:text-white focus:outline-hidden transition-colors duration-300">
+                    <i class="fa-solid fa-trash"></i>
+                    <span>{{ __('Delete Course') }}</span>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
+<script>
+    document.getElementById('deleteCourseBtn').addEventListener('click', function () {
+        Swal.fire({
+            title: "{{ __('Are you sure?') }}",
+            text: "{{ __('This will permanently delete the course and its classes.') }}",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "{{ __('Yes, delete it!') }}",
+            cancelButtonText: "{{ __('Cancel') }}",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteCourseForm').submit();
+            }
+        });
+    });
+</script>
 @endsection

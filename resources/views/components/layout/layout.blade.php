@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
-    <!-- Google tag (gtag.js) -->
+   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RPQYL861V"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -31,7 +31,7 @@
 
 <body class="bg-background-300 grid grid-rows-[auto_1fr_auto] h-screen">
 
-    <!-- Header de version Desktop -->
+   
     <header class= "hidden lg:flex bg-background-500 text-text-900 justify-around items-center p-4 h-35">
         <a href="{{route('home')}}" class="flex items-center">
             <img src="/images/logo.png" alt="logo" class="m-4 w-15">
@@ -41,13 +41,16 @@
             </div>
         </a>
 
-        <!-- Barra de navegación de version Desktop -->
+        
         <nav class= "font-five flex list-none gap-x-10 uppercase">
             <a href="{{route('home')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('home') }}</li>
             </a>
             <a href="{{route('cursos')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('courses') }}</li>
+            </a>
+            <a href="{{route('software.catalog')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
+                <li>{{ __('software') }}</li>
             </a>
             <a href="{{route('blogs.index')}}" class="border-b-2 border-transparent text-text-300 hover:text-variant-100 transition-colors duration-300 transform  hover:border-variant-100 mx-1.5 sm:mx-6">
                 <li>{{ __('Blog') }}</li>
@@ -60,7 +63,7 @@
             </a>
         </nav>
         
-        <!-- Botón de Login -->
+       
         <div class= "flex gap-x-10 items-center">
             @guest
                 <a href="{{route('login')}}" class= "flex p-2 rounded-md duration-300 ease-out border-transparent border-2 hover:text-variant-100">
@@ -69,7 +72,7 @@
                 </a>
             @endguest
             @auth
-                <a href="/dashboard">
+                <a href="{{ route('dashboard') }}">
                     <div class="flex flex-col justify-center items-center">
                         @if (Auth::user()->avatar == null)
                             <img src="{{asset('images/avatar.png')}}" alt="avatar" class="w-10 h-10 m-2 object-cover rounded-full">
@@ -82,24 +85,24 @@
                 </a>
             @endauth
 
-            <!-- Boton de toggle de tema -->
+            
             <button id="theme-toggle" class="p-2 border rounded border-none bg-transparent cursor-pointer hover:bg-transparent hover:text-yellow-500 transition-all duration-300">
                 <span id="theme-icon" class="material-symbols-outlined">dark_mode</span>
             </button>
         </div>      
     </header>
 
-    <!-- Header de version Mobile -->
+    
     <div class="flex justify-between items-center bg-background-500 text-text-900 p-4 lg:hidden">
         <a href="{{route('home')}}">
             <p class="font-two text-md">Code & Lens</p>
             <p class="font-one text-xs tracking-[7px]">PLATFORM</p>
         </a>
 
-        <!-- Ícono del menú hamburguesa -->
+       
         <i class="fa-solid fa-bars cursor-pointer" id="menu-toggle"></i>
 
-        <!-- Menú móvil (oculto por defecto) -->
+        
         <div id="mobile-menu" class="fixed inset-0 p-8 bg-background-500 bg-opacity-90 transform translate-x-full transition-transform duration-300 flex flex-col items-end justify-center space-y-4">
             <button id="menu-close" class="bg-trasparent text-3xl text-text-100 rounded">
                 <i class="fa-solid fa-xmark"></i>
@@ -107,7 +110,7 @@
             
            
 
-            <!-- Opciones del menú -->
+            
             @guest
                 <a href="{{route('login')}}" class= "flex rounded-md duration-300 ease-out text-text-100">
                     <i class="fa-solid fa-user"></i>
@@ -115,10 +118,10 @@
                 </a>
             @endguest
             @auth
-                <a href="/dashboard">
+                <a href="{{ route('dashboard') }}">
                     <div class="flex flex-col justify-center items-center">
                         @if (Auth::user()->avatar == null)
-                            <img src="{{asset('images/avatars/avatar.png')}}" alt="avatar" class="w-10 h-10 m-2 object-cover rounded-full">
+                            <img src="{{asset('images/avatar.png')}}" alt="avatar" class="w-10 h-10 m-2 object-cover rounded-full">
                         @else
                             <img src="{{asset('storage/avatars/'.Auth::user()->avatar->avatar)}}" alt="avatar" class="w-20 h-20 m-2 object-cover rounded-full">                    
                         @endif
@@ -134,6 +137,9 @@
                 </a>
                 <a href="{{route('cursos')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('courses') }}</li>
+                </a>
+                <a href="{{route('software.catalog')}}" class= "text-text-100 pt-4 pb-4">
+                    <li>{{ __('software') }}</li>
                 </a>
                 <a href="{{route('blogs.index')}}" class= "text-text-100 pt-4 pb-4">
                     <li>{{ __('Blog') }}</li>
@@ -155,11 +161,11 @@
         </div>
     </div>
 
-    <!-- Insertar contenido de la pagina -->
+  
     @yield('content')
 
     
-    <!-- Footer -->
+   
     <footer class="grid grid-cols-3 bg-background-500 lg:p-8 h-30 items-center justify-items-center">
         <div class="flex gap-x-2 p-1 lg:gap-x-4 items-center">
             <a href="/locale/en"><img src="{{asset('images/england.jpg')}}" alt="England Flag" class="w-10 h-auto"></a>
@@ -171,7 +177,7 @@
                     class="fa-brands fa-linkedin-in"></i></a>
             <a href="https://github.com/ClaudioParedesArbeloDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-github"></i></a>
-            <a href="https://www.instagram.com/claudioparedesdeveloper/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
+            <a href="https://www.instagram.com/codelenssolutions/" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-instagram"></i></a>
             <a href="https://x.com/ClaudioPDev" target="blank" class="text-md lg:text-3xl p-2 text-text-700 hover:text-variant-100" ><i
                     class="fa-brands fa-x-twitter"></i></a>
