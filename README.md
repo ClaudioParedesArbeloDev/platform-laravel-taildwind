@@ -101,4 +101,3 @@ The repo ships without `.env`: create one with the standard Laravel settings plu
 <p align="center">
   Hecho por / Built by <a href="https://github.com/ClaudioParedesArbeloDev"><b>Claudio Paredes Arbelo</b></a> · <a href="https://www.claudioparedes.site">Code & Lens Solutions</a>
 </p>
-# platform-laravel-taildwind
